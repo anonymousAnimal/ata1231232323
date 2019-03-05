@@ -102,12 +102,12 @@ var req;
 				{
 				var row = document.getElementById(rowId);
 			    row.parentNode.removeChild(row);
-			    document.getElementById("msg").value="booking successfully cancelled !!!";
+			    document.getElementById("msg").innerHTML="<h4 style='color:green;'>booking successfully cancelled !!!</h4>";
 			    return;
 				}
 			else
 				{
-				document.getElementById("msg").value="some error has occured at backend !! try again";
+				document.getElementById("msg").innerHTML="<h4 style='color:red'>some error has occured at backend !! please try after some time</h4>";
 					return;
 				}
 		
@@ -116,4 +116,5 @@ var req;
 		req.open("GET", url, true);
 		req.send();
 		
+		document.getElementById("msg").innerHTML="<h4 style='color:blue;'>Please wait !!!</h4>";
 	}

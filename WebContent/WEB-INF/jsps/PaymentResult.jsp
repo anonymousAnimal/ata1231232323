@@ -2,39 +2,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" /> -->
+<%@include file="/Bootstrap4.jsp" %>
 <meta charset="ISO-8859-1">
 <title>${msg }</title>
 </head>
 <body>
+<jsp:include page="/HeaderUser.jsp"/>
+<div class="container my-5 p-5">
+
 	<h2 align="center">${msg}</h2>
-	<div align="center">
-		<table>
-			<caption>Booking Details : </caption>
+	
+		<table class="table table-hover mt-4">
+			
+			<thead class="thead-dark">
 			<tr>
-				<td>ReservationID</td><td>User ID</td><td>RouteID</td><td>BookingDate</td>
-				<td>JourneyDate</td><td>Vehicle ID</td>
-				<td>Driver ID</td><td>Booking Status</td><td>Total Fare</td>
-				<td>Boarding point</td><td>Drop point</td>
+				<th>ReservationID</th><th>User ID</th>
+				<th>BookingDate</th><th>JourneyDate</th>
+				<th>Booking Status</th><th>Total Fare(Rs.)</th>
+				<th>Boarding point</th><th>Drop point</th>
 			</tr>
+			</thead>
 			<tr>
-				<td>${rb.getReservationID() }</td><td>${rb.getUserID() }</td><td>${rb.getRouteID() }</td>
-				<td>${rb.getBookingDate() }</td><td>${rb.getJourneyDate() }</td><td>${rb.getVehicleID() }</td>
-				<td>${rb.getDriverID() }</td><td>${rb.getBookingStatus() }</td><td>${rb.getTotalFare() }</td>
+				<td>${rb.getReservationID() }</td><td>${rb.getUserID() }</td>
+				<td>${rb.getBookingDate() }</td><td>${rb.getJourneyDate() }</td>
+				<td>${rb.getBookingStatus() }</td><td>${rb.getTotalFare() }</td>
 				<td>${rb.getBoardingPoint() }</td><td>${rb.getDropPoint() }</td>
 			</tr>
-		
 		</table>
-	</div>
+	
 	
 	<br>
-	<div align="center">
-	<form action="/ATA/User/Dashboard" >
-	<input type="submit" value="Go To DashBoard">
-	</form>
-	</div>
+	
+		<button type="button" class="btn btn-secondary" onclick="window.print()">print</button>
+</div>
+
 </body>
 </html>
