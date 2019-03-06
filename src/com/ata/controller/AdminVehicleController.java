@@ -54,13 +54,14 @@ public class AdminVehicleController {
 		return "AdminDashboard";
 	}
 	
-	@RequestMapping("/modifyVehicle/{id}")
+	/*@RequestMapping("/modifyVehicle/{id}")
 	public String modifyVehicle(@PathVariable("id")String vehicleID,Model m) 
 	{
 		VehicleBean vb=administratorServiceImpl.viewVehicle(vehicleID);
 		m.addAttribute("vehicleBean",vb);
 		return "ModifyVehicle";
-	}
+	}*/
+	
 	@RequestMapping("/modifyVehicle1")
 	public String modifyVehicle1(VehicleBean vehicleBean,Model m) 
 	{

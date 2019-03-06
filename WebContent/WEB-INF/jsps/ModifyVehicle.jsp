@@ -10,7 +10,9 @@
 </head>
 <body>
 <jsp:include page="/HeaderAdmin.jsp"></jsp:include>
-<h1>Modify Vehicle</h1>
+<h2>Modify Vehicle</h2>
+
+<div class="container col-md-6 my-5 p-4" >
 <f:form action="/ATA/Admin/modifyVehicle1" modelAttribute="vehicleBean" >
 <table align="center">
 <tr><td>VehicleID:<f:input type="text"  path="vehicleID" value="${vehicleBean.vehicleID}" readonly="true" /></td></tr>
@@ -23,5 +25,6 @@
 <tr><td><input type="submit" value="Modify Vehicle"></td></tr>
 </table>
 </f:form>
+</div>
 </body>
 </html>
