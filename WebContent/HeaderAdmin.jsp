@@ -29,15 +29,16 @@
       
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Route
+          Customize
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addroute">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Modify/Delete</a>
+          <a class="dropdown-item" href="/ATA/Admin/driverEditDelete">Driver</a>
+          <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Vehicle</a>
+          <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Route</a>
         </div>
       </li>
       
-      <li class="nav-item dropdown">
+     <!--  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Driver
         </a>
@@ -55,7 +56,7 @@
           <a class="dropdown-item" href="/ATA/Admin/addVehicle">Add</a>
           <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Modify/Delete</a>
         </div>
-      </li>
+      </li> -->
       
     </ul>
     <ul class="navbar-nav ml-auto">

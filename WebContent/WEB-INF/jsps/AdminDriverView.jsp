@@ -9,12 +9,15 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+	
+	
 
 	function modifyDriver(i){
 		//hiding editbtn
 		document.getElementById('editbtn'+i).style="display:none;";
-		//showing savechangesbtn
+		//showing savechangesbtn and cancelbtn
 		document.getElementById('savebtn'+i).style="display:inline;";
+		document.getElementById('cancelbtn'+i).style="display:inline;";
 		
 		//enabling the fields
 		document.getElementById("name"+i).removeAttribute("disabled");
@@ -25,6 +28,7 @@
 		document.getElementById("pincode"+i).removeAttribute("disabled");
 		document.getElementById("mobileNo"+i).removeAttribute("disabled");
 		document.getElementById("licenseNumber"+i).removeAttribute("disabled");
+		
 	}
 	
 	function saveChanges(i)
@@ -50,6 +54,27 @@
 		window.location.href='/ATA/Admin/dodelDriver/'+id;
 		
 	}
+	
+	function cancelEdit(i){
+		
+		//disabling the fields
+		document.getElementById("name"+i).setAttribute("disabled","disabled");
+		document.getElementById("street"+i).setAttribute("disabled","disabled");
+		document.getElementById("location"+i).setAttribute("disabled","disabled");
+		document.getElementById("city"+i).setAttribute("disabled","disabled");
+		document.getElementById("state"+i).setAttribute("disabled","disabled");
+		document.getElementById("pincode"+i).setAttribute("disabled","disabled");
+		document.getElementById("mobileNo"+i).setAttribute("disabled","disabled");
+		document.getElementById("licenseNumber"+i).setAttribute("disabled","disabled");
+		
+		//showing editbtn
+		document.getElementById('editbtn'+i).style="display:inline;";
+		//hiding savechangesbtn
+		document.getElementById('savebtn'+i).style="display:none;";
+		//hiding cancelbtn
+		document.getElementById('cancelbtn'+i).style="display:none;";
+		
+	}
 </script>
 
 
@@ -58,7 +83,9 @@
 <jsp:include page="/HeaderAdmin.jsp"/>
 
 <div class="container-fluid my-5 ">
-
+<div align="right">
+<br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addDriverModal" >Add Driver</button>
+</div>
 <table  class="table " >
 <thead class="thead-dark">
 <tr><th>sno</th><th>DriverID</th><th>Name</th><th>Street</th><th>Location</th><th>City</th><th>State</th><th>Pincode</th><th>MobileNo.</th><th>LicenseNo.</th><th>Edit</th><th>Delete</th></tr>
@@ -101,6 +128,7 @@
 		<button id="editbtn${list.indexOf(r)}" type="button" onclick="modifyDriver('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
 		
 		<button style="display:none;" id="savebtn${list.indexOf(r)}"  type="button" onclick="saveChanges('${list.indexOf(r)}')" class="btn btn-primary">Save</button>
+		<img style="display:none; img:hover;" id="cancelbtn${list.indexOf(r)}" width="15%"  onclick="cancelEdit('${list.indexOf(r)}')" alt="x" title="cancel" src="/ATA/static/images/close.png">
 		</td>
 		<td>
 		<button  type="button" onclick="deleteDriver('${r.driverID}')" class="btn btn-outline-danger">Delete</button>
@@ -109,9 +137,7 @@
 	</c:forEach>
 </tbody>
 </table>
-<div align="right">
-<br><button  type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addDriverModal" >Add Driver</button>
-</div>
+
 
 <br>
 <h3>${msg }</h3>
@@ -125,15 +151,14 @@
 </body>
 
 
-<!-- Login Modal -->
+<!-- addDriver Modal -->
 
 <div class="modal fade" id="addDriverModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Please Enter
-					your Credentials!!</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Enter Details </h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -181,7 +206,7 @@
 	</div>
 </div>
 
-
+<!-- modal end -->
 
 
 </html>
