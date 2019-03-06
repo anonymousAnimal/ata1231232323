@@ -7,6 +7,29 @@
 <!-- <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" /> -->
 
 <script>
+
+	function modifyRoute(i)
+	{
+		document.getElementById("edit"+i).style="display:none";
+		document.getElementById("save"+i).style="display:inline";
+		
+		document.getElementById("source"+i).removeAttribute("disabled");
+		document.getElementById("destination"+i).removeAttribute("disabled");
+		document.getElementById("distance"+i).removeAttribute("disabled");
+		document.getElementById("travelduration"+i).removeAttribute("disabled");
+		
+	}
+	function saveChanges(i)
+	{
+		var id=document.getElementById("routeID"+i).value;
+		var source=document.getElementById("source"+i).value;
+		var destination=document.getElementById("destination"+i).value;
+		var distance=document.getElementById("distance"+i).value;
+		var travelduration=document.getElementById("travelduration"+i).value;
+		
+		var url="/ATA/Admin/modifyRoute/?routeID="+id+"&source="+source+"&destination="+destination+"&distance="+distance+"&travelduration="+travelduration;
+			window.location.href=url;
+	}
 	function verifyAction(x){
 		var res = confirm('Are you sure ?');
 		if(res==false)
@@ -73,6 +96,7 @@
 <body>
 <jsp:include page="/HeaderAdmin.jsp"/>
 
+
 <div class="container my-5">
 
 <div align="right">
@@ -82,6 +106,7 @@
 <table class="table table-hover">
 <thead class="thead-dark">
 <tr><th>Sno.</th><th>RouteID</th><th>Source</th><th>Destination</th><th>Distance</th><th>TravelDuration</th><th style="width:10%;">Edit</th><th>Delete</th></tr>
+
 </thead>
 <tbody>
 	<c:forEach var="r"  items="${list}">
@@ -113,15 +138,18 @@
 		<td>
 		<button type="button" class="btn btn-outline-danger" onclick="verifyAction('${r.routeID}');">Delete</button>
 		</td>
+
 		</tr>
 	</c:forEach>
 </tbody>
 </table>
 
+
 <br>
 <h3>${msg }</h3>
 
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -173,5 +201,5 @@
 </div>
 
 <!-- modal end -->
-
+ 
 </html>

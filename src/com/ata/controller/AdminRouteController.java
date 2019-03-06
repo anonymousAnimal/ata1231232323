@@ -29,12 +29,12 @@ public class AdminRouteController {
 	@Autowired
 	RouteDaoImpl rdao;
 	
-	@RequestMapping("/addroute")
+	/*@RequestMapping("/addroute")
 	public String addRoute(Model m) 
 	{
 		m.addAttribute("routeBean",new RouteBean());
 		return "CreateRoute";
-	}
+	}*/
 	
 	@PostMapping("/doRoute")
 	public String addRoute1(RouteBean routeBean,Model m,HttpSession ses) 
@@ -49,15 +49,8 @@ public class AdminRouteController {
 		{
 			m.addAttribute("msg","route couldn't be added!!!");
 		}
+		
 		return goToEditDelete(m);
-	}
-	
-	@RequestMapping("/domodify/{id}")
-	public String modifyRoute(@PathVariable("id")String routeID,Model m) 
-	{
-		RouteBean rb=administratorServiceImpl.viewRoute(routeID);
-		m.addAttribute("routeBean",rb);
-		return "ModifyRoute";
 	}
 	
 	
@@ -71,7 +64,7 @@ public class AdminRouteController {
 			m.addAttribute("msg","Route cannot be modified due to some error");
 		
 		return goToEditDelete(m);
-//		 return "AdminDashboard"; 
+
 	}
 	
 //	@RequestMapping("/delRoute")
@@ -98,7 +91,9 @@ public class AdminRouteController {
 		catch(Exception e) {
 			m.addAttribute("msg","Cannot delete Route id="+id+": it may be booked by customer ["+e.getMessage()+"]");
 		}
+
 		return goToEditDelete(m);
+
 	}
 	
 	@RequestMapping("/goToEditDelete")
