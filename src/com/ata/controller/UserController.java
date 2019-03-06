@@ -42,6 +42,7 @@ public class UserController {
 	public String goToViewVehiclesAndRoutes(Model m) 
 	{
 		ArrayList<VehicleBean> vehicleList = cservice.viewAllVehicles();
+		
 		ArrayList<RouteBean> routeList = cservice.viewAllRoutes();
 		m.addAttribute("vehicleList",vehicleList);
 		m.addAttribute("routeList",routeList);
