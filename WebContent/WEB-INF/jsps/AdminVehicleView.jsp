@@ -29,21 +29,9 @@ function modifyvehicle(i)
 	var seatingCapacity=document.getElementById("seatingCapacity"+i).value;
 	var farePerKM=document.getElementById("farePerKM"+i).value;
 
- var url="modifyVehicle1/?vehicleID="+id+"&name="+name+"&type="+type+"&registrationNumber="+registrationNumber+"&seatingCapacity="+seatingCapacity+"&farePerKM="+farePerKM;
+ var url="/ATA/Admin/modifyVehicle1/?vehicleID="+id+"&name="+name+"&type="+type+"&registrationNumber="+registrationNumber+"&seatingCapacity="+seatingCapacity+"&farePerKM="+farePerKM;
 	
 	window.location.href=url;
-	/*  req.onreadystatechange = function(){
-		if(req.readyState == 4 && req.status == 200){
-			var res=req.responseText;
-			if(res==true)
-		document.getElementById("msg").innerHTML="<h4>Vehicle edited</h4>";
-		}
-	
-	} 
-	
-	req.open("GET", url, true);
-	req.send();
- */
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -61,15 +49,15 @@ function modifyvehicle(i)
 	<c:forEach var="r"  items="${list}">
 		<tr>
 		<td>${list.indexOf(r)}</td>
-		<td><input type="text" value="${r.vehicleID}" id="vehicleID${list.indexOf(r)}" name="vehicleID" disabled="disabled"></td>
-		<td><input type="text" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled"></td>
-		<td><input type="text" value="${r.type}" id="type${list.indexOf(r)}" name="type" disabled="disabled"></td>
-		<td><input type="text" value="${r.registrationNumber}" id="registrationNumber${list.indexOf(r)}" name="registrationNumber" disabled="disabled"></td>
-		<td><input type="text" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
-		<td><input type="text" value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%" value="${r.vehicleID}" id="vehicleID${list.indexOf(r)}" name="vehicleID" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%" value="${r.type}" id="type${list.indexOf(r)}" name="type" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%" value="${r.registrationNumber}" id="registrationNumber${list.indexOf(r)}" name="registrationNumber" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
+		<td><input type="text" style="width: 100%"value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
 		<td>
 	<button id="edit${list.indexOf(r)}" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
-	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Save</button>
+	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
 		
 		</td>
 		
@@ -79,10 +67,49 @@ function modifyvehicle(i)
 	</tbody>
 </table>
 
-<button  id="AddVehicle" class="btn btn-outline-success"  ></button>
+<button  id="AddVehicle" class="btn btn-outline-success" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button>
 </div>
 
-
+<div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Please Enter
+					Vehicle Details!!</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+			
+		<form action="/ATA/Admin/addVehicle1" method="post">
+		<div class="form-group"> 
+			<label for="vehicleName">VehicleName</label>
+			<input type="text" class="form-control" id="vehicleName" name="name" placeholder="VehicleName"><br>
+			 
+			<label for="VehicleType">VehicleType</label>
+			<input type="text" class="form-control" id="VehicleType" name="type" placeholder="VehicleType"><br>
+			
+			<label for="RegistrationNo">RegistrationNo</label>
+			<input type="text" class="form-control" id="RegistrationNo" name="registrationNumber" placeholder="RegistrationNo"><br>
+			
+			<label for="SeatingCapacity">SeatingCapacity</label>
+			<input type="text" class="form-control" id="SeatingCapacity" name="seatingCapacity" placeholder="SeatingCapacity"><br>
+			
+			<label for="FarePerKM">FarePerKM</label>
+			<input type="text" class="form-control" id="FarePerKM" name="farePerKM" placeholder="FarePerKM"><br>
+			</div>
+		
+				<button type="submit" class="btn btn-primary mt-4">Add Vehicle</button>
+		</form>
+			
+			</div>
+</div>
+</div>
+</div>
+<h3 align="center" style="color:green;">${msg}</h3>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -108,4 +108,13 @@ public class DriverBean {
 		this.licenseNumber = licenseNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "DriverBean [driverID=" + driverID + ", name=" + name + ", street=" + street + ", location=" + location
+				+ ", city=" + city + ", state=" + state + ", pincode=" + pincode + ", mobileNo=" + mobileNo
+				+ ", licenseNumber=" + licenseNumber + "]";
+	}
+	
+	
+
 }

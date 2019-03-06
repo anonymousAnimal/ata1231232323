@@ -51,7 +51,8 @@ public class AdminVehicleController {
 		{
 			m.addAttribute("msg","INVALID");
 		}
-		return "AdminDashboard";
+		//return "AdminDashboard";
+		return goToEditDelete(m);
 	}
 	
 	/*@RequestMapping("/modifyVehicle/{id}")
@@ -68,7 +69,11 @@ public class AdminVehicleController {
 		boolean res=administratorServiceImpl.modifyVehicle(vehicleBean);
 		if(res)
 			m.addAttribute("msg","Vehicle modified");
-		return "AdminDashboard";
+		
+		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
+		m.addAttribute("list", list);
+	
+		return "AdminVehicleView";
 	}
 	
 	@RequestMapping("/dodelVehicle/{id}")
