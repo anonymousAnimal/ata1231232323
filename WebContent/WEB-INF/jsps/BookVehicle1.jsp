@@ -17,7 +17,7 @@
 	<jsp:include page="/HeaderUser.jsp"></jsp:include>
 
 
-	<div class="container col-md-6 pt-5" style="border:1px solid black;">
+	<div class="container col-md-6 my-5 p-4" style="border:1px solid grey;">
 		<%-- <f:form action="Page2" modelAttribute="reservationBean" method="POST">
 	<table cellpadding="10px" cellspacing="20px">
 	
@@ -165,7 +165,8 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Proceed</button>
+			
+			<button type="submit" class="btn btn-primary mt-4">Proceed</button>
 		
 		</form>
 	
