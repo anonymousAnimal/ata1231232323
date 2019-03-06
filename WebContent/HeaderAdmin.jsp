@@ -32,8 +32,8 @@
           Route
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addroute">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Modify/Delete</a>
+         <!--  <a class="dropdown-item" href="/ATA/Admin/addroute">Add</a>
+          --> <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Modify/Delete</a>
         </div>
       </li>
       
@@ -42,8 +42,9 @@
           Driver
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addDriver">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/driverEditDelete">Modify/Delete</a>
+         <!--  <a class="dropdown-item" href="/ATA/Admin/addDriver">Add</a>
+          -->
+           <a class="dropdown-item" href="/ATA/Admin/driverEditDelete">Modify/Delete</a>
         </div>
       </li>
       
@@ -52,8 +53,9 @@
           Vehicle
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addVehicle">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Modify/Delete</a>
+          <!-- <a class="dropdown-item" href="/ATA/Admin/addVehicle">Add</a>
+           -->
+           <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Modify/Delete</a>
         </div>
       </li>
       

@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" />
 <script type="text/javascript" >
 
-function  savechanges(id)
+function  modifyvehicle(id)
 {
 	document.getElementById("edit"+id).style="display:none";
 	document.getElementById("save"+id).style="display:inline";
@@ -21,7 +21,7 @@ function  savechanges(id)
 	document.getElementById("farePerKM"+id).removeAttribute("disabled"); 
 	
 }
-function modifyvehicle(i)
+function savechanges(i)
 {    var id=document.getElementById("vehicleID"+i).value;
 	var name=document.getElementById("name"+i).value;
 	var type=document.getElementById("type"+i).value;
@@ -33,6 +33,12 @@ function modifyvehicle(i)
 	
 	window.location.href=url;
 }
+function verifyAction(x){
+	var res = confirm('Are you sure you want to remove ?');
+	if(res==false)
+		return;
+	window.location.href='dodelVehicle/'+x;
+}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -40,7 +46,7 @@ function modifyvehicle(i)
 <body>
 <jsp:include page="/HeaderAdmin.jsp"></jsp:include>
 <div class="container-fluid my-5">
-<table cellspacing="10px" align="center" class="table">
+<table cellspacing="10px" align="center" class="table table-hover">
 <thead class="thead-dark">
 <tr><th>S.NO</th><th>VehicleID</th><th>Name</th><th>Type</th><th>RegistrationNo</th><th>SeatingCapacity</th><th>FarePerKm</th><th>Edit</th><th>Delete</th></tr>
 </thead>
@@ -56,18 +62,20 @@ function modifyvehicle(i)
 		<td><input type="text" style="width: 100%" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
 		<td><input type="text" style="width: 100%"value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
 		<td>
-	<button id="edit${list.indexOf(r)}" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
-	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
+	<button id="edit${list.indexOf(r)}" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
+	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
 		
 		</td>
 		
-		<td><button id="delete" name="Delete" onclick="window.location.href='dodelVehicle/${r.vehicleID}'" class="btn btn-outline-danger">Delete</button></td>
+		<td><button id="delete" name="Delete" onclick="verifyAction('${r.vehicleID}')" class="btn btn-outline-danger">Delete</button></td>
 		</tr>
 	</c:forEach>
 	</tbody>
 </table>
 
-<button  id="AddVehicle" class="btn btn-outline-success" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button>
+<div align="right">
+<button  id="AddVehicle" class="btn btn-secondary" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button>
+</div>
 </div>
 
 <div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog"
@@ -86,23 +94,25 @@ function modifyvehicle(i)
 			
 		<form action="/ATA/Admin/addVehicle1" method="post">
 		<div class="form-group"> 
-			<label for="vehicleName">VehicleName</label>
-			<input type="text" class="form-control" id="vehicleName" name="name" placeholder="VehicleName"><br>
+			<label for="vehicleName">Vehicle Name</label>
+			<input type="text" class="form-control" id="vehicleName" name="name" ><br>
 			 
-			<label for="VehicleType">VehicleType</label>
-			<input type="text" class="form-control" id="VehicleType" name="type" placeholder="VehicleType"><br>
+			<label for="VehicleType">Vehicle Type</label>
+			<input type="text" class="form-control" id="VehicleType" name="type"><br>
 			
 			<label for="RegistrationNo">RegistrationNo</label>
-			<input type="text" class="form-control" id="RegistrationNo" name="registrationNumber" placeholder="RegistrationNo"><br>
+			<input type="text" class="form-control" id="RegistrationNo" name="registrationNumber"><br>
 			
-			<label for="SeatingCapacity">SeatingCapacity</label>
-			<input type="text" class="form-control" id="SeatingCapacity" name="seatingCapacity" placeholder="SeatingCapacity"><br>
+			<label for="SeatingCapacity">Seating Capacity</label>
+			<input type="text" class="form-control" id="SeatingCapacity" name="seatingCapacity"><br>
 			
 			<label for="FarePerKM">FarePerKM</label>
-			<input type="text" class="form-control" id="FarePerKM" name="farePerKM" placeholder="FarePerKM"><br>
+			<input type="text" class="form-control" id="FarePerKM" name="farePerKM"><br>
 			</div>
-		
+				
+				
 				<button type="submit" class="btn btn-primary mt-4">Add Vehicle</button>
+				
 		</form>
 			
 			</div>
