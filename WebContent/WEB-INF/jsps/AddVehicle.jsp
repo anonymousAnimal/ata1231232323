@@ -9,30 +9,39 @@
 </head>
 <body>
 <jsp:include page="/HeaderAdmin.jsp"></jsp:include>
-<h1>ADD VEHICLE</h1>
-
+<h2>Add Vehicle</h2>
+<div class="container col-md-6 my-5 p-4" style="border:1px solid grey;">
 <form action="addVehicle1" method="post">
-<div class="form-group">
-
-<label>VehicleName</label>
-<input type="text" id="name" class="form-control" name="name">
-<tr><td>VehicleName:</td></tr>
-<tr><td>VehicleType:<input type="text" name="type"></td></tr>
-<tr><td>RegistrationNo:<input type="text" name="registrationNumber"></td></tr>
-<tr><td>SeatingCapacity:<input type="text" name="seatingCapacity"></td></tr>
-<tr><td>FarePerKM:<input type="text"  name="farePerKM"></td></tr>
-<tr><td><input type="submit" value="Add Vehicle"></td></tr>
-</table>
-
-</div>
+		<div class="form-group"> 
+			<label for="vehicleName">VehicleName</label>
+			<input type="text" class="form-control" id="vehicleName" name="name" placeholder="VehicleName"><br>
+			 
+			<label for="VehicleType">VehicleType</label>
+			<input type="text" class="form-control" id="VehicleType" name="type" placeholder="VehicleType"><br>
+			
+			<label for="RegistrationNo">RegistrationNo</label>
+			<input type="text" class="form-control" id="RegistrationNo" name="registrationNumber" placeholder="RegistrationNo"><br>
+			
+			<label for="SeatingCapacity">SeatingCapacity</label>
+			<input type="text" class="form-control" id="SeatingCapacity" name="seatingCapacity" placeholder="SeatingCapacity"><br>
+			
+			<label for="FarePerKM">FarePerKM</label>
+			<input type="text" class="form-control" id="FarePerKM" name="farePerKM" placeholder="FarePerKM"><br>
+			
+		
+		
+		
+		</div>
+		
+				<button type="submit" class="btn btn-primary mt-4">Add Vehicle</button>
 </form>
-${msg}
-${vehicleBean.vehicleID}
+</div>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 
 </body>
 </html>

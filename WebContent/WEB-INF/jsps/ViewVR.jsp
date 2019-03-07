@@ -22,7 +22,7 @@
 	<div class="container mt-5">
 	<table class="table table-hover">
 	<caption>List of Vehicles</caption>
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">VehicleID</th>
       <th scope="col">Name</th>
@@ -49,7 +49,7 @@
 	<div class="container mt-5">
 	<table class="table table-hover">
 	<caption>List of Routes</caption>
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">RouteID</th>
       <th scope="col">Source</th>

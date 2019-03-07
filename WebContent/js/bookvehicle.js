@@ -7,6 +7,7 @@ var req;
 	function checkajax(){
 		try{
 		req = new XMLHttpRequest();
+		console.log("///////////////////ajax////");
 		/* alert("xmlhttprequest done") */
 		return;
 		}
@@ -24,9 +25,11 @@ var req;
 			/* alert("activex microsoft xmlhttp done"); */
 			return;
 		}catch(e){}
-		
+		console.log("///////////////////ajax////");
 		alert("your browser doesnot support ajax");
 	}
+	
+	
 	
 	function getDestination(text, id){
 		console.log("get destination called");

@@ -29,31 +29,12 @@
       
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Route
+          Customize
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addroute">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Modify/Delete</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Driver
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addDriver">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/driverEditDelete">Modify/Delete</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Vehicle
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ATA/Admin/addVehicle">Add</a>
-          <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Modify/Delete</a>
+          <a class="dropdown-item" href="/ATA/Admin/driverEditDelete">Driver</a>
+          <a class="dropdown-item" href="/ATA/Admin/vehicleEditDelete">Vehicle</a>
+          <a class="dropdown-item" href="/ATA/Admin/goToEditDelete">Route</a>
         </div>
       </li>
       
@@ -67,44 +48,6 @@
   </div>
 </nav>
 	
-
-	
-	<!-- navigation bar  -->
-	<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/ATA/">ATA</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/ATA/Admin/Dashboard">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Route <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/ATA/Admin/addroute">Add</a></li>
-          <li><a href="/ATA/Admin/goToEditDelete">Modify/Delete</a></li>
-        </ul>
-      </li>
-      
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Driver<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-         <li><a href="/ATA/Admin/addDriver">Add</a></li>
-          <li><a href="/ATA/Admin/driverEditDelete">Modify/Delete</a></li>
-        </ul>
-      </li>
-      
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vehicle <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-        <li><a href="/ATA/Admin/addVehicle">Add</a></li>
-          <li><a href="/ATA/Admin/vehicleEditDelete">Modify/Delete</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/ATA/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
- -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

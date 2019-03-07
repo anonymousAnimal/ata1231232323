@@ -29,12 +29,12 @@ public class AdminRouteController {
 	@Autowired
 	RouteDaoImpl rdao;
 	
-	@RequestMapping("/addroute")
+	/*@RequestMapping("/addroute")
 	public String addRoute(Model m) 
 	{
 		m.addAttribute("routeBean",new RouteBean());
 		return "CreateRoute";
-	}
+	}*/
 	
 	@PostMapping("/doRoute")
 	public String addRoute1(RouteBean routeBean,Model m,HttpSession ses) 
@@ -47,25 +47,24 @@ public class AdminRouteController {
 		}
 		else
 		{
-			m.addAttribute("msg","INVALID");
+			m.addAttribute("msg","route couldn't be added!!!");
 		}
-		return "AdminDashboard";
+		
+		return goToEditDelete(m);
 	}
 	
-	@RequestMapping("/domodify/{id}")
-	public String modifyRoute(@PathVariable("id")String routeID,Model m) 
-	{
-		RouteBean rb=administratorServiceImpl.viewRoute(routeID);
-		m.addAttribute("routeBean",rb);
-		return "ModifyRoute";
-	}
+	
 	@RequestMapping("/modifyRoute")
 	public String modifyRoute1(RouteBean routeBean,Model m) 
 	{
 		boolean res=administratorServiceImpl.modifyRoute(routeBean);
 		if(res)
 			m.addAttribute("msg","Route modified");
-		return "AdminDashboard";
+		else
+			m.addAttribute("msg","Route cannot be modified due to some error");
+		
+		return goToEditDelete(m);
+
 	}
 	
 //	@RequestMapping("/delRoute")
@@ -77,11 +76,12 @@ public class AdminRouteController {
 //		return "DelRoute";
 //	
 	
-	@RequestMapping("/dodelRoute/{id}")
-	public String delRoute1( @PathVariable("id")String id,RouteBean routeBean,Model m) 
+	@RequestMapping("/dodelRoute")
+	public String delRoute1(String id,Model m) 
 	{
 		//CredentialsBean cb=(CredentialsBean)ses.getAttribute("credentialsBean");
 		//authenticate user
+		//String id = routeBean.getRouteID();
 		try {
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
@@ -91,7 +91,9 @@ public class AdminRouteController {
 		catch(Exception e) {
 			m.addAttribute("msg","Cannot delete Route id="+id+": it may be booked by customer ["+e.getMessage()+"]");
 		}
-		return "AdminDashboard";
+
+		return goToEditDelete(m);
+
 	}
 	
 	@RequestMapping("/goToEditDelete")
