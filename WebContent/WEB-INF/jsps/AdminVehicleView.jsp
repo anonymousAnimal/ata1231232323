@@ -12,7 +12,7 @@ function  modifyvehicle(id)
 {
 	document.getElementById("edit"+id).style="display:none";
 	document.getElementById("save"+id).style="display:inline";
-	
+	document.getElementById("cancel"+id).style="display:inline";
 	
 	document.getElementById("name"+id).removeAttribute("disabled"); 
 	document.getElementById("type"+id).removeAttribute("disabled"); 
@@ -39,13 +39,36 @@ function verifyAction(x){
 		return;
 	window.location.href='dodelVehicle/'+x;
 }
+
+function cancel(i)
+{
+	//disabling all fields 
+	
+	document.getElementById("name"+i).setAttribute("disabled","disabled");
+	document.getElementById("type"+i).setAttribute("disabled","disabled");
+	document.getElementById("registrationNumber"+i).setAttribute("disabled","disabled");
+	document.getElementById("seatingCapacity"+i).setAttribute("disabled","disabled");
+	document.getElementById("farePerKM"+i).setAttribute("disabled","disabled");
+	
+	//removing save and cancel btn
+	document.getElementById("save"+i).style="display:none";
+	document.getElementById("cancel"+i).style="display:none";
+	document.getElementById("edit"+i).style="display:inline";
+}
+
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/HeaderAdmin.jsp"></jsp:include>
-<div class="container-fluid my-5">
+<div class="container my-5">
+
+<div align="right">
+<button  id="AddVehicle" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button><br>
+</div>
+
 <table cellspacing="10px" align="center" class="table table-hover">
 <thead class="thead-dark">
 <tr><th>S.NO</th><th>VehicleID</th><th>Name</th><th>Type</th><th>RegistrationNo</th><th>SeatingCapacity</th><th>FarePerKm</th><th>Edit</th><th>Delete</th></tr>
@@ -64,7 +87,7 @@ function verifyAction(x){
 		<td>
 	<button id="edit${list.indexOf(r)}" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
 	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
-		
+	<img  alt="x" style="display:none;" title="cancel" id="cancel${list.indexOf(r)}" src="/ATA/static/images/close.png" onclick="cancel('${list.indexOf(r)}')" width="20%">
 		</td>
 		
 		<td><button id="delete" name="Delete" onclick="verifyAction('${r.vehicleID}')" class="btn btn-outline-danger">Delete</button></td>
@@ -73,9 +96,6 @@ function verifyAction(x){
 	</tbody>
 </table>
 
-<div align="right">
-<button  id="AddVehicle" class="btn btn-secondary" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button>
-</div>
 </div>
 
 <div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog"

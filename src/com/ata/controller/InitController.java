@@ -5,8 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.security.sasl.AuthorizeCallback;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,7 @@ import com.ata.util.UserImpl;
 
 @Controller
 @Transactional
+
 public class InitController {
 
 	@Autowired
@@ -203,4 +207,10 @@ public class InitController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
+	
+	
+	/*public String sessionTimeout()
+	{
+		return "SessionTimeoutPage";
+	}*/
 }

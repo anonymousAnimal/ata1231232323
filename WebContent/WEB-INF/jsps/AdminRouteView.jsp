@@ -100,7 +100,7 @@
 <div class="container my-5">
 
 <div align="right">
-<br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addRouteModal" >Add Driver</button>
+<br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addRouteModal" >Add Route</button>
 </div>
 
 <table class="table table-hover">

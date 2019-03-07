@@ -78,6 +78,9 @@ public class AdminViewBookingDetails {
 	{
 		Set<String> source=cservice.findAllSources();
 		m.addAttribute("sourceSet",source);
+			ArrayList<ReservationBean>resList=resdao.findAll();
+		
+		m.addAttribute("resList",resList);
 		
 		return"AdminViewBookingDetails";
 	}
