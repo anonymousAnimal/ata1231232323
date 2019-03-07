@@ -15,6 +15,7 @@ function checkAjax(){
 
 function unallotedDrivers(reservationid,driverid)
 {
+	document.getElementById("msg").innerHTML = "please wait .......";
 	var did=document.getElementById(driverid).value;
 	var url="allotDriver/?resid="+reservationid+"&did="+did;
 	console.log("------inside unalloteddrivers------");
@@ -22,14 +23,14 @@ function unallotedDrivers(reservationid,driverid)
 	{
 		if(req.readyState == 4 && req.status == 200){
 			console.log("------------");
-			document.getElementById(reservationid).innerHTML= req.responseText;
-			
+			//document.getElementById(reservationid).innerHTML= req.responseText;
+			document.getElementById("msg").innerHTML = req.responseText;
 		}
 	}
 	
 	req.open("GET", url, true);
 	req.send();
-	document.getElementById("msg").innerHTML = "please wait ......."
+	
 	
 }
 

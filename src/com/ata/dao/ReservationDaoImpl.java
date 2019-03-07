@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -103,5 +104,14 @@ public class ReservationDaoImpl implements XyzDao<ReservationBean>{
 		String sql="from ReservationBean where driverID is null";
 		ArrayList<ReservationBean> al=(ArrayList<ReservationBean>) sf.getCurrentSession().createQuery(sql).list();
 		return al;
+	}
+	
+	
+	
+	public ArrayList<ReservationBean> getUserReservations(String UserId) {
+		Criteria criteria =  sf.getCurrentSession().createCriteria(ReservationBean.class);
+				Criterion c1 =  Restrictions.eq("userID", UserId);
+				criteria.add(c1);
+		return (ArrayList<ReservationBean>)criteria.list();
 	}
 }

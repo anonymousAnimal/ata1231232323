@@ -12,30 +12,76 @@
 <body onload="checkAjax()">
 
 <jsp:include page="/HeaderAdmin.jsp"></jsp:include>
-<div id="result" align="center">
 
-<table>
-<tr>
-<td>Source</td><td><select name="sourcename" id="source" onchange="getDestination(this.value)"> 
+
+<div class="container-fluid my-5 p-5">
+<div class="row mb-5">
+
+<div class="col-lg-3">
+<label  for="source">Source</label>
+
+
+<select name="sourcename" class="form-control" id="source" onchange="getDestination(this.value)" style="width: 100%" > 
 <option value="NONE" label="Select Source"></option>
 <c:forEach var="s" items="${sourceSet}">
 <option value="${s}">${s}</option>
 </c:forEach>
-</select></td>
-</tr>
+</select>
+</div>
 
-<tr>
-<td>Destination</td><td><div id="destdiv">
-<select name="destinationname" id="destination" disabled="disabled">
+<div class="col-lg-3">
+<label  for="destination">Destination</label>
+<div id="destdiv">
+<select name="destinationname" class="form-control" id="destination" disabled="disabled" style="width: 100%">
 	<option id= "0" value="NONE">NONE</option>
 </select>
 </div>
-</td></tr>
+</div>
 
+<div class="col-lg-3">
+<label  for="journeyDate">journey Date</label>
+<input type="date" name="journeyDate" id="journeyDate" class="form-control" style="width:100%">
+</div>
+
+<div class="col-lg-2 mt-2" align="left">
+<!-- <label for="btn" >button-lable </label> -->
+<button id="btn" onclick="viewBooking('journeyDate','source','destination')" class="btn btn-primary mt-4 ">View Details
+</button>
+</div>
+
+</div>
+<!-- table showing all booking details  it changes when particular source & destination is selected-->
+
+<div id="result" align="center" style="overflow-y:scroll ">
+<table class="table table-hover">
+<thead class="thead-dark">
+<tr><th  class="col-md-2">ReservationID</th><th  class="col-md-2">UserID</th><th  class="col-md-2">RouteID</th><th  class="col-md-2">BookingDate</th><th  class="col-md-2">JourneyDate</th><th  class="col-md-2">VehicleID</th><th  class="col-md-2">DriverID</th><th  class="col-md-2">Status</th><th  class="col-md-2">TotalFare</th><th  class="col-md-2">Boarding</th><th  class="col-md-2">DropPoint</th></tr>
+</thead>
+
+<tbody>
+<c:forEach var="r" items="${resList}">
 <tr>
-<td>Journey Date</td><td><input type="date" name="journeyDate" id="journeyDate" ></td></tr>
+<td  class="col-md-2">${r.reservationID} </td>
+<td  class="col-md-2">${r.userID}</td>
+<td  class="col-md-2">${r.routeID}</td>
+<td  class="col-md-2">${r.bookingDate}</td>
+<td  class="col-md-2">${r.journeyDate}</td>
+<td  class="col-md-2">${r.vehicleID}</td>
+<td  class="col-md-2">${r.driverID}</td>
+<td  class="col-md-2">${r.bookingStatus}</td>
+<td  class="col-md-2">${r.totalFare }</td>
+<td  class="col-md-2">${r.boardingPoint}</td>
+<td  class="col-md-2">${r.dropPoint}</td>
+</tr>
+
+</c:forEach>
+</tbody>
+
 </table>
-<br><button onclick="viewBooking('journeyDate','source','destination')">View Details</button>
+
+</div>
+
+
 </div>
 
 

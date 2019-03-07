@@ -16,9 +16,9 @@
 		<h1 style="font-size: 50px">Have A Nice Journey</h1>
 		<!--   <p>And I'm a Photographer</p> -->
 		<button type="button" class="btn btn-outline-success"
-			data-toggle="modal" data-target="#registerModal">sign-up</button>
+			data-toggle="modal" data-target="#registerModal">Sign-up</button>
 		<button type="button" class="btn btn-outline-primary"
-			data-toggle="modal" data-target="#loginModal">login</button>
+			data-toggle="modal" data-target="#loginModal">Login</button>
 		<h4 style="color:red; font-size:20px">${msg }</h4>
 	</div>
 

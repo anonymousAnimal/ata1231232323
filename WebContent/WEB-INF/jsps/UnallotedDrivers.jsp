@@ -11,12 +11,16 @@
 </head>
 <body onload="checkAjax()">
 <jsp:include page="/HeaderAdmin.jsp"/>
-<table cellspacing="10px" align="center">
-<tr><th>ReservationID</th><th>UserID</th><th>RouteID</th><th>BookingDate</th><th>JourneyDate</th><th>VehicleID</th><th>DriverID</th><th>BookingStatus</th><th>TotalFare</th><th>BoardingPoint</th><th>DropPoint</th><th>Allot Driver</th></tr>
+<div  class="container-fluid my-5"  >
+
+<c:if test="${!UnallotedDrivers.isEmpty()}">
+<div style="overflow-x: auto; white-space: normal;">
+<table class="table table-hover">
+<tr><th width="200px">ReservationID</th><th width="200px">UserID</th><th width="200px">RouteID</th><th width="200px">BookingDate</th><th width="200px">JourneyDate</th><th width="200px">VehicleID</th><th width="200px">DriverID</th><th width="200px">BookingStatus</th><th width="200px">TotalFare</th><th width="200px">BoardingPoint</th><th width="200px">DropPoint</th><th width="200px">Allot Driver</th></tr>
 	
 	
 	<c:forEach var="r"  items="${UnallotedDrivers}">
-		<tr id="${r.reservationID}">
+		<tr>
 		<td>${r.reservationID}</td><td>${r.userID}</td><td>${r.routeID}</td><td>${r.bookingDate}</td><td>${r.journeyDate}</td><td>${r.vehicleID}</td><td>${r.driverID}</td><td>${r.bookingStatus}</td><td>${r.totalFare}</td><td>${r.boardingPoint}</td><td>${r.dropPoint}</td>
 		<td>
 		<select name="drivername" id="driverid">
@@ -33,8 +37,15 @@
 	</c:forEach>
 
 </table>
+</div>
+</c:if>
+<c:if test="${UnallotedDrivers.isEmpty() }">
+<h1 align="center"> No pending Booking found!!!!!!!</h1>
+</c:if>
 
-<div id="msg" >
+<div id="msg">
+</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

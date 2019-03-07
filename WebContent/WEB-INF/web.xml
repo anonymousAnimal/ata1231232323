@@ -20,10 +20,17 @@
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
   
+ 
   
 
-<session-config>
-    <session-timeout>40</session-timeout>
-</session-config>
-  
+  <filter>
+		<filter-name>errorHandlerFilter</filter-name>
+		<filter-class>com.ata.filter.ErrorHandleFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>errorHandlerFilter</filter-name>
+		<url-pattern>/Admin/*</url-pattern>
+		<url-pattern>/User/*</url-pattern>
+		<url-pattern>/Booking/*</url-pattern>
+	</filter-mapping>
 </web-app>

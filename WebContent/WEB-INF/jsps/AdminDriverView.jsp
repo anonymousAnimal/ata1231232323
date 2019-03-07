@@ -86,7 +86,7 @@
 <div align="right">
 <br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addDriverModal" >Add Driver</button>
 </div>
-<table  class="table " >
+<table  class="table table-hover" >
 <thead class="thead-dark">
 <tr><th>sno</th><th>DriverID</th><th>Name</th><th>Street</th><th>Location</th><th>City</th><th>State</th><th>Pincode</th><th>MobileNo.</th><th>LicenseNo.</th><th>Edit</th><th>Delete</th></tr>
 </thead>

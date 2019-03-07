@@ -34,7 +34,7 @@
   <div class="container-fluid" >
   <h4 class="card-title">
   <a href = "ViewVehiclesAndRoutes">
-  vehicles/routes details 
+  Vehicles/Routes details 
   </a>
   </h4>
   </div>
@@ -47,7 +47,7 @@
   <div class="container-fluid" >
   <h4 class="card-title">
   <a href = "/ATA/Booking/BookVehicle">
-  book vehicle
+  Book vehicle
   </a>
   </h4>
   </div>
@@ -59,7 +59,7 @@
   <div class="container-fluid" >
   <h4 class="card-title">
   <a href = "/ATA/Booking/CancelBooking">
-  cancel booking
+  Cancel booking
   </a>
   </h4>
   </div>
