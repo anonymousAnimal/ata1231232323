@@ -15,7 +15,7 @@ function checkAjax(){
 
 function unallotedDrivers(reservationid,driverid)
 {
-	document.getElementById("msg").innerHTML = "please wait ......."
+	document.getElementById("msg").innerHTML = "please wait .......";
 	var did=document.getElementById(driverid).value;
 	var url="allotDriver/?resid="+reservationid+"&did="+did;
 	console.log("------inside unalloteddrivers------");

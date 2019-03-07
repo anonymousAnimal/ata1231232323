@@ -208,9 +208,10 @@ public class UserBooking {
 	}
 	
 	@RequestMapping(path="/ViewBooking")
-	public String viewBooking(Model m) 
+	public String viewBooking(HttpSession ses, Model m) 
 	{
-		ArrayList<ReservationBean> list = rsvDaoImpl.findAll();
+		CredentialsBean cb = (CredentialsBean)ses.getAttribute("credentialsBean");
+		ArrayList<ReservationBean> list = rsvDaoImpl.getUserReservations(cb.getUserID());
 		m.addAttribute("reservationList",list);
 		return "ViewPrintBooking1";
 	}

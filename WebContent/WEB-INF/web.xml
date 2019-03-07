@@ -31,5 +31,6 @@
 		<filter-name>errorHandlerFilter</filter-name>
 		<url-pattern>/Admin/*</url-pattern>
 		<url-pattern>/User/*</url-pattern>
+		<url-pattern>/Booking/*</url-pattern>
 	</filter-mapping>
 </web-app>

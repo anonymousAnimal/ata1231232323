@@ -82,7 +82,7 @@
 <body>
 <jsp:include page="/HeaderAdmin.jsp"/>
 
-<div class="container my-5 ">
+<div class="container-fluid my-5 ">
 <div align="right">
 <br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addDriverModal" >Add Driver</button>
 </div>
