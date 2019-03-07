@@ -40,7 +40,7 @@
 
 <div class="col-lg-3">
 <label  for="journeyDate">journey Date</label>
-<input type="date" name="journeyDate" id="journeyDate" class="form-control" style="width:100%"></td></tr>
+<input type="date" name="journeyDate" id="journeyDate" class="form-control" style="width:100%">
 </div>
 
 <div class="col-lg-2 mt-2" align="left">
