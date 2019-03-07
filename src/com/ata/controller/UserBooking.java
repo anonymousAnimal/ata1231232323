@@ -117,52 +117,7 @@ public class UserBooking {
 	
 	
 	
-	/*@RequestMapping(path="/Page2",method=RequestMethod.POST)
-	public String bookingPage1(@ModelAttribute("reservationBean") ReservationBean reservationBean, @RequestParam("source") String source,
-			@RequestParam("destination")String destination,
-			@RequestParam("vehicleid")String vehicleid, Model m, HttpSession session) {
-		
-		System.out.println("vehicle id is "+vehicleid);
-		
-		VehicleBean vb = vehicleDaoImpl.findByID(vehicleid);
-		RouteBean rb = routeDaoImpl.getRouteBySD(source, destination);
-		CredentialsBean cb = (CredentialsBean)session.getAttribute("credentialsBean");
-		PaymentBean pb = new PaymentBean();
-		
-		if(rb==null) {
-			System.out.println("routebean is null");
-			
-		}
-		if(vb==null)
-			System.out.println("vehiclebean is null");
-		
-		System.out.println("boarding point "+reservationBean.getBoardingPoint()+",   "+reservationBean.getDropPoint());
-		
-		//reservationBean.boardingPoint  - set from form
-		//reservationBean.bookingStatus - pending (default)
-		//reservationBean.driverID - assigned by admin
-		//reservationBean.Droppoint - set from form
-		//reservationBean.journeyDate - set from form
-		reservationBean.setBookingDate(new Date());  // to assign current date to booking date.
-		reservationBean.setReservationID(dbsequtil.getID(reservationBean)); // set reservationID
-		reservationBean.setRouteID(rb.getRouteID());									// set Route id
-		reservationBean.setTotalFare(vb.getFarePerKM() * rb.getDistance());			//calc. and set total fare 
-		reservationBean.setUserID(cb.getUserID());												//set userid from credentialsbean
-		reservationBean.setVehicleID(vb.getVehicleID());                      //assigning vehicle id
-		
-		
-		
-		m.addAttribute("vehicleBean",vb);
-		m.addAttribute("routeBean",rb);
-		m.addAttribute("paymentBean",pb);
-		m.addAttribute("reservationBean",reservationBean);
-		
-		session.setAttribute("vehicleBean", vb);
-		session.setAttribute("routeBean", rb);
-		session.setAttribute("reservationBean",reservationBean);
-		
-		return "BookVehicle2";
-	}*/
+	
 	
 	@RequestMapping(path="/Page2",method=RequestMethod.POST)
 	public String bookingPage1(ReservationBean reservationBean, String vehicleid, String source, String destination, Model m, HttpSession session) {
@@ -237,9 +192,9 @@ public class UserBooking {
 	
 	
 	@RequestMapping(path="/CancelBooking")
-	public String cancelBooking(Model m) {
+	public String cancelBooking(HttpSession ses, Model m) {
 		
-		ArrayList<ReservationBean> reservationList = rsvDaoImpl.findAll();
+		ArrayList<ReservationBean> reservationList = rsvDaoImpl.getUserReservations(((CredentialsBean)ses.getAttribute("credentialsBean")).getUserID());
 		m.addAttribute("reservationList",reservationList);
 		return "CancelBooking";
 	}
