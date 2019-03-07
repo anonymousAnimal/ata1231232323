@@ -90,7 +90,7 @@ public class AdminViewBookingDetails {
 	{
 		System.out.println("source = "+source);
 		ArrayList<String> list = cservice.getDestination(source);
-		String txt = "<select id = 'destination' name = 'destinationname'>";
+		String txt = "<select id = 'destination' name = 'destinationname' class='form-control' style='width: 100%'>";
 		
 		for(String d: list) {
 			txt += "<option label="+d+" value="+d+">"+d+"</option>";
@@ -134,11 +134,11 @@ public class AdminViewBookingDetails {
 		}
 		else
 		{
-			response+="<table><tr><th>ReservationID</th><th>UserID</th><th>RouteID</th><th>BookingDate</th><th>JourneyDate</th><th>VehicleID</th><th>DriverID</th><th>BookingStatus</th><th>TotalFare</th><th>BoardingPoint</th><th>DropPoint</th></tr>";
+			response+="<table class='table table-hover'><thead class='thead-dark'><tr><th  class='col-md-2'>ReservationID</th><th class='col-md-2'>UserID</th><th class='col-md-2'>RouteID</th><th class='col-md-2'>BookingDate</th><th class='col-md-2'>JourneyDate</th><th class='col-md-2'>VehicleID</th><th class='col-md-2'>DriverID</th><th class='col-md-2'>Status</th><th class='col-md-2'>TotalFare</th><th class='col-md-2'>Boarding</th><th class='col-md-2'>DropPoint</th></tr></thead>";
 			
 			for(ReservationBean r:resList)
 			{
-				response+="<tr><td>"+r.getReservationID()+"</td><td>"+r.getUserID()+"</td><td>"+r.getRouteID()+"</td><td>"+r.getBookingDate()+"</td><td>"+r.getJourneyDate()+"</td><td>"+r.getVehicleID()+"</td><td>"+r.getDriverID()+"</td><td>"+r.getBookingStatus()+"</td><td>"+r.getTotalFare()+"</td><td>"+r.getBoardingPoint()+"</td><td>"+r.getDropPoint()+"</td></tr>";
+				response+="<tbody><tr><td>"+r.getReservationID()+"</td><td>"+r.getUserID()+"</td><td>"+r.getRouteID()+"</td><td>"+r.getBookingDate()+"</td><td>"+r.getJourneyDate()+"</td><td>"+r.getVehicleID()+"</td><td>"+r.getDriverID()+"</td><td>"+r.getBookingStatus()+"</td><td>"+r.getTotalFare()+"</td><td>"+r.getBoardingPoint()+"</td><td>"+r.getDropPoint()+"</td></tr></tbody>";
 			
 			}
 		}
@@ -146,15 +146,5 @@ public class AdminViewBookingDetails {
 		
 	}
 	
-	/*
-	 AJAX 
- for(String n:source)
-	{
-		if(n.toUpperCase().startsWith(name.toUpperCase()))
-		{
-			return n;
-		}
-		
-	}*/
-
+	
 }

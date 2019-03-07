@@ -31,7 +31,7 @@ public class ErrorHandleFilter implements Filter{
 	{
 		System.out.println("Session null ---------------");
 		httprequest.getRequestDispatcher("/SessionTimeoutPage.jsp").forward(req, res);
-		
+		return;
 	}
 	else{
 		chain.doFilter(req, res);
