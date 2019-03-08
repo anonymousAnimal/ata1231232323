@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Session timeout Login!!!!</h1>
+<h1 align="center">Session timeout Login!!!!</h1>
 </body>
 </html>

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ata.bean.ProfileBean;
 import com.ata.bean.ReservationBean;
 import com.ata.bean.RouteBean;
 import com.ata.bean.VehicleBean;
 import com.ata.service.CustomerServiceImpl;
+import com.ata.util.UserImpl;
 
 @Controller
 @RequestMapping("/User")
@@ -26,6 +28,9 @@ public class UserController {
 	InitController initController;
 	@Autowired
 	CustomerServiceImpl cservice;
+	
+	@Autowired
+	UserImpl userImpl;
 	
 	@RequestMapping("/Dashboard")
 	public String goToDashboard(HttpSession session)
@@ -48,6 +53,17 @@ public class UserController {
 		m.addAttribute("routeList",routeList);
 		
 		return "ViewVR";
+	}
+	
+	@RequestMapping("/editProfile")
+	public String editProfile(ProfileBean profileBean,Model m)
+	{
+		System.out.println("inside edit profile : "+profileBean);
+		userImpl.editProfile(profileBean);
+		//m.addAttribute("profileBean", profileBean);
+		
+		
+		return "Profile";
 	}
 	
 	

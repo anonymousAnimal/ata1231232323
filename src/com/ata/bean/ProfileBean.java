@@ -48,7 +48,7 @@ public class ProfileBean {
 	private String mobileNo;
 	private String emailID;
 	@Transient
-	@NotEmpty(message="cannot be empty")
+	//@NotEmpty(message="cannot be empty")
 	private String password;
 	
 	public ProfileBean() {

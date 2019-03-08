@@ -98,6 +98,14 @@ public class UserImpl implements User{
 			}
 	}
 	
+	public boolean editProfile(ProfileBean profileBean)
+	{
+		
+		boolean res= updao.update(profileBean);
+		
+		return res;
+	}
+	
 	
 
 }
