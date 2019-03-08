@@ -17,6 +17,7 @@
 	
 
 <div class="card-deck mt-5">
+
 <div class="card col-lg-3"  >
 <a href = "/ATA/Admin/ShowUnallotedDrivers">
   <img src="/ATA/static/images/driver.png" alt="Avatar" style="width:100%" ></a>
@@ -30,13 +31,25 @@
 </div>
 
 
-	<div class="card col-lg-3" >
+<div class="card col-lg-3" >
 <a href = "/ATA/Admin/AdminView">
   <img src="/ATA/static/images/viewbooking.png" alt="Avatar" style="width:100%" ></a>
   <div class="container-fluid" >
   <h4 class="card-title">
   <a href = "/ATA/Admin/AdminView">
   <b>View Booking Details</b> 
+  </a>
+  </h4>
+  </div>
+</div>
+
+<div class="card col-lg-3" >
+<a href = "/ATA/Admin/AdminView">
+  <img src="/ATA/static/images/usermgmt.png" alt="Avatar" style="width:100%" ></a>
+  <div class="container-fluid" >
+  <h4 class="card-title">
+  <a href = "/ATA/Admin/AdminView">
+  <b>User Management</b> 
   </a>
   </h4>
   </div>

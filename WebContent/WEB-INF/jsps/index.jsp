@@ -6,7 +6,7 @@
 <%@include file="/Bootstrap4.jsp" %>
 <meta charset="ISO-8859-1">
 <!-- <meta http-equiv="refresh" content="3;url=login" /> -->
-<title>Insert title here</title>
+<title>ATA</title>
 </head>
 <body>
 	<div class="bg-image"></div>

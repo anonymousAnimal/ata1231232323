@@ -13,4 +13,11 @@ public class AdminDashboardController {
 		
 		return "AdminDashboard";
 	}
+	
+	@RequestMapping("/UserManagement")
+	public String goToUserManagement(String msg) {
+		
+		return "AdminUserMgmt";
+	}
+	
 }

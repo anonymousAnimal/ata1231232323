@@ -90,7 +90,7 @@
 <thead class="thead-dark">
 <tr><th>sno</th><th>DriverID</th><th>Name</th><th>Street</th><th>Location</th><th>City</th><th>State</th><th>Pincode</th><th>MobileNo.</th><th>LicenseNo.</th><th>Edit</th><th>Delete</th></tr>
 </thead>
-<tbody>
+<tbody class="form-group">
 
 	<c:forEach var="r"  items="${list}" >
 		<tr>
@@ -98,31 +98,31 @@
 		${list.indexOf(r)}
 		</td>
 		<td>
-		 <input style="width:100%" type="text" value="${r.driverID}" id="driverID${list.indexOf(r)}" name="driverID" disabled="disabled">
+		 <input  class="form-control" style="width:100%" type="text" value="${r.driverID}" id="driverID${list.indexOf(r)}" name="driverID" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.street}" id="street${list.indexOf(r)}" name="street" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.street}" id="street${list.indexOf(r)}" name="street" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.location}" id="location${list.indexOf(r)}" name="location" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.location}" id="location${list.indexOf(r)}" name="location" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.city}" id="city${list.indexOf(r)}" name="city" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.city}" id="city${list.indexOf(r)}" name="city" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.state}" id="state${list.indexOf(r)}" name="state" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.state}" id="state${list.indexOf(r)}" name="state" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.pincode}" id="pincode${list.indexOf(r)}" name="pincode" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.pincode}" id="pincode${list.indexOf(r)}" name="pincode" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.mobileNo}" id="mobileNo${list.indexOf(r)}" name="mobileNo" disabled="disabled">
+		<input  class="form-control" style="width:100%" type="text" value="${r.mobileNo}" id="mobileNo${list.indexOf(r)}" name="mobileNo" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.licenseNumber}" id="licenseNumber${list.indexOf(r)}" name="licenseNumber" disabled="disabled"/>
+		<input  class="form-control" style="width:100%" type="text" value="${r.licenseNumber}" id="licenseNumber${list.indexOf(r)}" name="licenseNumber" disabled="disabled"/>
 		</td>
 		<td>
 		<button id="editbtn${list.indexOf(r)}" type="button" onclick="modifyDriver('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
@@ -134,7 +134,9 @@
 		<button  type="button" onclick="deleteDriver('${r.driverID}')" class="btn btn-outline-danger">Delete</button>
 		</td>
 		</tr>
+
 	</c:forEach>
+	
 </tbody>
 </table>
 

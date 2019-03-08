@@ -108,26 +108,26 @@
 <tr><th>Sno.</th><th>RouteID</th><th>Source</th><th>Destination</th><th>Distance</th><th>TravelDuration</th><th style="width:10%;">Edit</th><th>Delete</th></tr>
 
 </thead>
-<tbody>
+<tbody class="form-group">
 	<c:forEach var="r"  items="${list}">
 		<tr>
 		<td>
 		${list.indexOf(r)}
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.routeID}" id="routeID${list.indexOf(r)}" name="routeID" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.routeID}" id="routeID${list.indexOf(r)}" name="routeID" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.source}" id="source${list.indexOf(r)}" name="source" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.source}" id="source${list.indexOf(r)}" name="source" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.destination}" id="destination${list.indexOf(r)}" name="destination" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.destination}" id="destination${list.indexOf(r)}" name="destination" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.distance}" id="distance${list.indexOf(r)}" name="distance" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.distance}" id="distance${list.indexOf(r)}" name="distance" disabled="disabled">
 		</td>
 		<td>
-		<input style="width:100%" type="text" value="${r.travelduration}" id="travelduration${list.indexOf(r)}" name="travelduration" disabled="disabled">
+		<input class="form-control" style="width:100%" type="text" value="${r.travelduration}" id="travelduration${list.indexOf(r)}" name="travelduration" disabled="disabled">
 		</td>
 		<td>
 		<button id="editbtn${list.indexOf(r)}" type="button" onclick="modifyRoute('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>

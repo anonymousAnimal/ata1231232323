@@ -71,19 +71,20 @@ function cancel(i)
 
 <table cellspacing="10px" align="center" class="table table-hover">
 <thead class="thead-dark">
-<tr><th>S.NO</th><th>VehicleID</th><th>Name</th><th>Type</th><th>RegistrationNo</th><th>SeatingCapacity</th><th>FarePerKm</th><th>Edit</th><th>Delete</th></tr>
+<tr><th>S.NO</th><th>VehicleID</th><th>Name</th><th>Type</th><th style="width:150px">RegistrationNo</th><th style="width:150px">SeatingCapacity</th><th style="width:150px">FarePerKm</th><th style="width:150px">Edit</th><th>Delete</th></tr>
 </thead>
 	
-	<tbody>
+	<tbody class="form-group">
+	
 	<c:forEach var="r"  items="${list}">
 		<tr>
 		<td>${list.indexOf(r)}</td>
-		<td><input type="text" style="width: 100%" value="${r.vehicleID}" id="vehicleID${list.indexOf(r)}" name="vehicleID" disabled="disabled"></td>
-		<td><input type="text" style="width: 100%" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled"></td>
-		<td><input type="text" style="width: 100%" value="${r.type}" id="type${list.indexOf(r)}" name="type" disabled="disabled"></td>
-		<td><input type="text" style="width: 100%" value="${r.registrationNumber}" id="registrationNumber${list.indexOf(r)}" name="registrationNumber" disabled="disabled"></td>
-		<td><input type="text" style="width: 100%" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
-		<td><input type="text" style="width: 100%"value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
+		<td><input  class="form-control" type="text" style="width: 100%" value="${r.vehicleID}" id="vehicleID${list.indexOf(r)}" name="vehicleID" disabled="disabled"></td>
+		<td><input class="form-control" type="text" style="width: 100%" value="${r.name}" id="name${list.indexOf(r)}" name="name" disabled="disabled"></td>
+		<td><input class="form-control" type="text" style="width: 100%" value="${r.type}" id="type${list.indexOf(r)}" name="type" disabled="disabled"></td>
+		<td><input class="form-control" type="text" style="width: 100%" value="${r.registrationNumber}" id="registrationNumber${list.indexOf(r)}" name="registrationNumber" disabled="disabled"></td>
+		<td><input class="form-control" type="text" style="width: 100%" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
+		<td><input class="form-control" type="text" style="width: 100%"value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
 		<td>
 	<button id="edit${list.indexOf(r)}" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
 	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
@@ -93,7 +94,9 @@ function cancel(i)
 		<td><button id="delete" name="Delete" onclick="verifyAction('${r.vehicleID}')" class="btn btn-outline-danger">Delete</button></td>
 		</tr>
 	</c:forEach>
+	
 	</tbody>
+	
 </table>
 
 </div>
