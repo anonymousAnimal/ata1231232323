@@ -38,6 +38,7 @@ public class UserProfileDaoImpl implements XyzDao<ProfileBean> {
 	@Override
 	public boolean update(ProfileBean t) {
 		try {
+			
 			sessionFactory.getCurrentSession().merge(t);
 			return true;
 		} catch (Exception e) {
