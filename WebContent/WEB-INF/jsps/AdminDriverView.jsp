@@ -141,8 +141,20 @@
 </table>
 
 
-<br>
-<h3>${msg }</h3>
+<!-- displaying alert msg  CODE START-->
+<c:choose>
+<c:when test="${status==true}">
+<div class="alert alert-success"> ${msg }<a href="#" class="close" data-dismiss="alert">×</a></div>
+</c:when>
+
+<c:when test="${status==false}">
+<div class="alert alert-danger"> ${msg }<a href="#" class="close" data-dismiss="alert">×</a></div>
+</c:when>
+</c:choose>
+
+<!-- CODE END -->
+
+
 </div>
 
 
@@ -160,7 +172,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Enter Details </h5>
+				<h5 class="modal-title" id="exampleModalLabel">Enter Driver Details </h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>

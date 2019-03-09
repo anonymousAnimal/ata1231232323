@@ -48,11 +48,13 @@ public class AdminDriverController {
 				if(authImpl.authorize(cb.getUserID()).equals("A"))
 				{
 					administratorServiceImpl.addDriver(driverBean);
-					m.addAttribute("msg","DriverAdded");
+					m.addAttribute("status", true);
+					m.addAttribute("msg","Driver Added");
 				}
 			}catch(Exception e) {
 				System.out.println("Exception occurs : "+e.getMessage());
-				m.addAttribute("msg","invalid details of driver [may be duplicate license number]");
+				m.addAttribute("status",false);
+				m.addAttribute("msg","Invalid details of driver [may be duplicate license number]");
 			}
 		
 			
@@ -74,11 +76,14 @@ public class AdminDriverController {
 	{
 		System.out.println(driverBean);
 		boolean res=administratorServiceImpl.modifyDriver(driverBean);
-		if(res)
+		if(res){
+			m.addAttribute("status",true);
 			m.addAttribute("msg","Driver modified");
-		else
+		}
+		else{
+			m.addAttribute("status",false);
 			m.addAttribute("msg","some error occured");
-		
+		}
 		ArrayList<DriverBean> list= driverdao.findAll();
 		m.addAttribute("list", list);
 		return "AdminDriverView";
@@ -96,13 +101,18 @@ public class AdminDriverController {
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
 		int rows=administratorServiceImpl.deleteDriver(ar);
-		if(rows > 0)
+		if(rows > 0){
+			m.addAttribute("status", true);
 			m.addAttribute("msg","Driver deleted with id : "+id);
-		else
-			m.addAttribute("msg","cannot delete driver with id: "+id);
+		}
+		else{
+			m.addAttribute("status", false);
+			m.addAttribute("msg","Cannot Delete Driver with id: "+id);
+			}
 		}
 		catch(Exception e) {
-			m.addAttribute("msg","cannot delete driver with id: "+id+" as it may be assigned to a user ");
+			m.addAttribute("status", false);
+			m.addAttribute("msg","Cannot Delete Driver with id: "+id+" as it may be assigned to a user ");
 		}
 		
 	

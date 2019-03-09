@@ -145,8 +145,18 @@
 </table>
 
 
-<br>
-<h3>${msg }</h3>
+<!-- displaying alert msg  CODE START-->
+<c:choose>
+<c:when test="${status==true}">
+<div class="alert alert-success"> ${msg }<a href="#" class="close" data-dismiss="alert">×</a></div>
+</c:when>
+
+<c:when test="${status==false}">
+<div class="alert alert-danger"> ${msg }<a href="#" class="close" data-dismiss="alert">×</a></div>
+</c:when>
+</c:choose>
+
+<!-- CODE END -->
 
 </div>
 
