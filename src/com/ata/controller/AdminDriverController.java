@@ -87,21 +87,7 @@ public class AdminDriverController {
 			msg="some error occured";
 		
 		return msg;
-		/*ArrayList<DriverBean> list= driverdao.findAll();
-=======
-		if(res){
-			m.addAttribute("status",true);
-			m.addAttribute("msg","Driver modified");
-		}
-		else{
-			m.addAttribute("status",false);
-			m.addAttribute("msg","some error occured");
-		}
-		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
->>>>>>> branch 'master' of https://github.com/anonymousAnimal/ata1231232323.git
-		m.addAttribute("list", list);
-		return "AdminDriverView";*/
-		//return "AdminDashboard";
+
 	}
 	
 	

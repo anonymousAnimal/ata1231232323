@@ -116,6 +116,7 @@ public class AdministratorServiceImpl implements Administrator {
 
 	@Override
 	public int deleteRoute(ArrayList<String> routeID) {
+		
 		int rows=routeDaoImpl.delete(routeID);
 		return rows;
 	}
