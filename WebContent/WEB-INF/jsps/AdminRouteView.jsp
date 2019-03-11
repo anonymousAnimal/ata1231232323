@@ -235,6 +235,7 @@
 </thead>
 </table>
 
+<div style="height:500px; overflow-y:auto;">
 <table class="table table-hover" id="myTable">
 <tbody class="form-group">
 	<c:forEach var="r"  items="${list}">
@@ -271,8 +272,8 @@
 	</c:forEach>
 </tbody>
 </table>
-
-
+</div>
+<%-- 
 <!-- displaying alert msg  CODE START-->
 <c:choose>
 <c:when test="${status==true}">
@@ -284,7 +285,7 @@
 </c:when>
 </c:choose>
 
-<!-- CODE END -->
+<!-- CODE END --> --%>
 
 </div>
 

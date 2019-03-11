@@ -5,10 +5,136 @@
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" /> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript" >
 
-function  modifyvehicle(id)
+$.noConflict();
+
+jQuery(document).ready(function($){
+	
+	$('Button[id^=editbtn]').click(function()
+	{
+		$(this).parents('tr').eq(0).find("input:not(:first)").removeAttr("disabled");
+		$(this).css({display:'none'});
+		$(this).siblings('Button[id^=savebtn]').css({display:'inline'});
+		$(this).siblings('img[id^=cancelbtn]').css({display:'inline'});
+		
+	});
+	
+	$('Button[id^=savebtn]').click(function()
+	{
+		$(this).css("display",'none');
+		var tr = $(this).parents('tr').eq(0);
+		
+		tr.find("input:not(:first)").attr("disabled","disabled");
+		tr.find('img[id^=cancelbtn]').css("display","none");
+		tr.find('button[id^=editbtn]').css("display","inline");
+		
+		  swal({
+			  title: "please wait....",
+			  icon : '/ATA/static/images/runningrabbit.gif',
+			  buttons: false
+			});  
+		
+	    var url = "/ATA/Admin/modifyVehicle1/?"
+		var tr = $(this).parents('tr').eq(0);
+		tr.find("input[name]").each(function(){
+			url += $(this).attr('name')+"="+$(this).prop('value')+"&";
+		});
+		url = url.slice(0,-1);
+		console.log("url is "+url);
+		
+		$.get(url,function(data, status)
+		{
+			if(status=="success")
+			 	swal({
+				  	 title: status,
+				 	 text: data,
+				  	 icon : 'success'
+					});
+			else
+				swal({
+					  title: status,
+					  text: data,
+					  icon : 'info'
+					});
+		});					 
+	});
+	
+	$('img[id^=cancelbtn]').click(function()
+	{
+		$(this).css("display",'none');
+		var tr = $(this).parents('tr').eq(0);
+		tr.find("input:not(:first)").attr("disabled","disabled");
+		tr.find('button[id^=savebtn]').css("display","none");
+		tr.find('button[id^=editbtn]').css("display","inline");
+	});
+	
+	$('button[id^=deletebtn]').click(function()
+	{
+		var tr = $(this).parents('tr').eq(0);
+		var id = tr.find("input[id^=vehicleID]").prop("value");
+		console.log("id is "+id);
+		//return;
+		
+		var url = "/ATA/Admin/dodelVehicle/"+id;
+		
+			
+		 swal({
+			  title: "Are you sure?",
+			  text: "Once deleted, you will not be able to recover this !",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete)=>{
+				
+				if(willDelete)
+				{
+					$.get(url,function(data,status)
+							{
+								console.log(status+", "+data);
+								 var icontxt = "info";
+								    
+								    
+								    if(data=="success"){
+								    	tr.remove();  //if success is returned then removing the current row from table;
+								    	icontxt="success";
+								    }
+								    	
+								    swal(data, {
+									      icon: icontxt,
+									     });
+								});
+				}
+				else
+					swal("operation cancelled !!",{icon : "info"})
+			});
+	});
+	
+	
+	
+	$('#search').keyup(function()
+	{
+		console.log("keyup");
+		var keyword = $(this).prop('value').toLowerCase();
+		    $("#myTable tr").filter(function() {
+		    	var txt= $(this).find("td:first").text()+" ";
+		    	$(this).find('input[name]').each(function(){
+		    		txt += this.value+" ";
+		    	});
+		    	console.log(txt);
+		    	
+		      $(this).toggle(txt.toLowerCase().indexOf(keyword) > -1);
+		    });
+
+	});
+});
+
+/* function  modifyvehicle(id)
 {
 	document.getElementById("edit"+id).style="display:none";
 	document.getElementById("save"+id).style="display:inline";
@@ -54,7 +180,7 @@ function cancel(i)
 	document.getElementById("save"+i).style="display:none";
 	document.getElementById("cancel"+i).style="display:none";
 	document.getElementById("edit"+i).style="display:inline";
-}
+} */
 
 
 </script>
@@ -66,14 +192,17 @@ function cancel(i)
 <div class="container my-5">
 
 <div align="right">
+<input class="form-control col-lg-2" id="search" title="search box" placeholder="search any thing !!!" value=""><br>
 <button  id="AddVehicle" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addVehicleModal">Add Vehicle</button><br>
 </div>
 
-<table cellspacing="10px" align="center" class="table table-hover">
+<table  class="table table-hover">
 <thead class="thead-dark">
 <tr><th>S.NO</th><th>VehicleID</th><th>Name</th><th>Type</th><th style="width:150px">RegistrationNo</th><th style="width:150px">SeatingCapacity</th><th style="width:150px">FarePerKm</th><th style="width:150px">Edit</th><th>Delete</th></tr>
 </thead>
-	
+</table >
+<div style="height:500px; overflow-y:auto;">
+<table class="table table-hover" id="myTable">
 	<tbody class="form-group">
 	
 	<c:forEach var="r"  items="${list}">
@@ -85,21 +214,22 @@ function cancel(i)
 		<td><input class="form-control" type="text" style="width: 100%" value="${r.registrationNumber}" id="registrationNumber${list.indexOf(r)}" name="registrationNumber" disabled="disabled"></td>
 		<td><input class="form-control" type="text" style="width: 100%" value="${r.seatingCapacity}" id="seatingCapacity${list.indexOf(r)}" name="seatingCapacity" disabled="disabled"></td>
 		<td><input class="form-control" type="text" style="width: 100%"value="${r.farePerKM}" id="farePerKM${list.indexOf(r)}" name="farePerKM" disabled="disabled"></td>
-		<td>
-	<button id="edit${list.indexOf(r)}" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
-	<button  id="save${list.indexOf(r)}" style="display: none;" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
-	<img  alt="x" style="display:none;" title="cancel" id="cancel${list.indexOf(r)}" src="/ATA/static/images/close.png" onclick="cancel('${list.indexOf(r)}')" width="20%">
+		<td style="width:10%;">
+	<button id="editbtn${list.indexOf(r)}" onclick="modifyvehicle('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
+	<button  id="savebtn${list.indexOf(r)}" style="display: none;" onclick="savechanges('${list.indexOf(r)}')" class="btn btn-outline-primary">Save</button>
+	<img  alt="x" style="display:none;" title="cancel" id="cancelbtn${list.indexOf(r)}" src="/ATA/static/images/close.png" onclick="cancel('${list.indexOf(r)}')" width="20%">
 		</td>
 		
-		<td><button id="delete" name="Delete" onclick="verifyAction('${r.vehicleID}')" class="btn btn-outline-danger">Delete</button></td>
+		<td><button id="deletebtn" name="Delete" onclick="verifyAction('${r.vehicleID}')" class="btn btn-outline-danger">Delete</button></td>
 		</tr>
 	</c:forEach>
 	
 	</tbody>
 	
 </table>
+</div>
 
-<!-- displaying alert msg  CODE START-->
+<%-- <!-- displaying alert msg  CODE START-->
 <c:choose>
 <c:when test="${status==true}">
 <div class="alert alert-success"> ${msg }<a href="#" class="close" data-dismiss="alert">×</a></div>
@@ -113,7 +243,7 @@ function cancel(i)
 <!-- CODE END -->
 
 </div>
-
+ --%>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

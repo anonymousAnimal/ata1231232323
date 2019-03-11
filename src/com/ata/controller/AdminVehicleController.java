@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ata.bean.CredentialsBean;
 import com.ata.bean.RouteBean;
@@ -64,43 +65,56 @@ public class AdminVehicleController {
 	}*/
 	
 	@RequestMapping("/modifyVehicle1")
-	public String modifyVehicle1(VehicleBean vehicleBean,Model m) 
+	public @ResponseBody String modifyVehicle1(VehicleBean vehicleBean,Model m) 
 	{
+		String msg ="";
 		boolean res=administratorServiceImpl.modifyVehicle(vehicleBean);
 		if(res){
-			m.addAttribute("status", true);
-			m.addAttribute("msg","Vehicle modified");
+			/*
+			 * m.addAttribute("status", true); m.addAttribute("msg","Vehicle modified");
+			 */
+			msg="success";
 		}
 		else
 		{
-			m.addAttribute("status", false);
-			m.addAttribute("msg","Some error occured !!Cannot modify Vehicle!!!");
+			/*
+			 * m.addAttribute("status", false);
+			 * m.addAttribute("msg","Some error occured !!Cannot modify Vehicle!!!");
+			 */
+			msg="Some error occured !!Cannot modify Vehicle!!!";
 		}
-		ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
-		m.addAttribute("list", list);
-	
-		return "AdminVehicleView";
+		return msg;
+		
 	}
 	
 	@RequestMapping("/dodelVehicle/{id}")
-	public String delRoute1( @PathVariable("id")String id,VehicleBean vehicleBean,Model m) 
+	public @ResponseBody String delRoute1( @PathVariable("id")String id,VehicleBean vehicleBean,Model m) 
 	{
-		//CredentialsBean cb=(CredentialsBean)ses.getAttribute("credentialsBean");
-		//authenticate user
+		String msg="";
 		try {
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
 		int rows=administratorServiceImpl.deleteVehicle(ar);
-		m.addAttribute("status", true);
-		m.addAttribute("msg","Vehicle deleted with id : "+id);
+		if(rows > 0)
+			msg="success";
+			/*
+			 * m.addAttribute("status", true);
+			 * m.addAttribute("msg","Vehicle deleted with id : "+id);
+			 */
 		}
 		catch(Exception e) {
-			m.addAttribute("status", false);
-			m.addAttribute("msg","Cannot Delete Vehicle id = "+id+" because it may already be assigned to a Customer ");
+			msg= "Cannot Delete Vehicle id = "+id+" because it may already be assigned to a Customer ";
+			/*
+			 * m.addAttribute("status", false);
+			 * m.addAttribute("msg","Cannot Delete Vehicle id = "
+			 * +id+" because it may already be assigned to a Customer ");
+			 */
 		}
-		ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
-		m.addAttribute("list", list);
-		return "AdminVehicleView";
+		/*
+		 * ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
+		 * m.addAttribute("list", list); return "AdminVehicleView";
+		 */
+		return msg;
 	}
 	
 	@RequestMapping("/vehicleEditDelete")
