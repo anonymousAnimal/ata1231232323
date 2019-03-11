@@ -26,8 +26,6 @@ public class AdminRouteController {
 	Administrator administratorServiceImpl;
 	@Autowired
 	AuthImpl authImpl;
-	@Autowired
-	RouteDaoImpl rdao;
 	
 	/*@RequestMapping("/addroute")
 	public String addRoute(Model m) 
@@ -105,7 +103,7 @@ public class AdminRouteController {
 	
 	@RequestMapping("/goToEditDelete")
 	public String goToEditDelete(Model m){
-		ArrayList<RouteBean> list= rdao.findAll();
+		ArrayList<RouteBean> list= administratorServiceImpl.findAllRoute();
 		m.addAttribute("list", list);
 		return "AdminRouteView";
 	}

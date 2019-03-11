@@ -28,8 +28,6 @@ public class AdminVehicleController {
 	Administrator administratorServiceImpl;
 	@Autowired
 	AuthImpl authImpl;
-	@Autowired
-	VehicleDaoImpl vehicleDaoImpl;
 	
 	@RequestMapping("/addVehicle")
 	public String addVehicle(Model m) 
@@ -78,7 +76,7 @@ public class AdminVehicleController {
 			m.addAttribute("status", false);
 			m.addAttribute("msg","Some error occured !!Cannot modify Vehicle!!!");
 		}
-		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
+		ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
 		m.addAttribute("list", list);
 	
 		return "AdminVehicleView";
@@ -100,7 +98,7 @@ public class AdminVehicleController {
 			m.addAttribute("status", false);
 			m.addAttribute("msg","Cannot Delete Vehicle id = "+id+" because it may already be assigned to a Customer ");
 		}
-		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
+		ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
 		m.addAttribute("list", list);
 		return "AdminVehicleView";
 	}
@@ -108,7 +106,7 @@ public class AdminVehicleController {
 	@RequestMapping("/vehicleEditDelete")
 	public String goToEditDelete(Model m){
 		
-		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
+		ArrayList<VehicleBean> list= administratorServiceImpl.findAllVehicle();
 		m.addAttribute("list", list);
 		return "AdminVehicleView";
 	}

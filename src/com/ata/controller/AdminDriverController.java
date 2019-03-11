@@ -28,8 +28,7 @@ public class AdminDriverController {
 	Administrator administratorServiceImpl;
 	@Autowired
 	AuthImpl authImpl;
-	@Autowired
-	DriverDaoImpl driverdao;
+	
 	
 	@RequestMapping("/addDriver")
 	public String addDriver(Model m) 
@@ -65,7 +64,9 @@ public class AdminDriverController {
 	@RequestMapping("/modifyDriver/{id}")
 	public String modifyVehicle(@PathVariable("id")String driverID,Model m) 
 	{
-		DriverBean db=driverdao.findByID(driverID);
+		
+		DriverBean db=administratorServiceImpl.findByID(driverID);
+		
 		m.addAttribute("driverBean",db);
 		return "ModifyDriver";
 	}
@@ -84,7 +85,7 @@ public class AdminDriverController {
 			m.addAttribute("status",false);
 			m.addAttribute("msg","some error occured");
 		}
-		ArrayList<DriverBean> list= driverdao.findAll();
+		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
 		m.addAttribute("list", list);
 		return "AdminDriverView";
 		//return "AdminDashboard";
@@ -116,7 +117,7 @@ public class AdminDriverController {
 		}
 		
 	
-		ArrayList<DriverBean> list= driverdao.findAll();
+		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
 		m.addAttribute("list", list);
 		return "AdminDriverView";
 	}
@@ -124,7 +125,7 @@ public class AdminDriverController {
 	@RequestMapping("/driverEditDelete")
 	public String goToEditDelete(Model m){
 		
-		ArrayList<DriverBean> list= driverdao.findAll();
+		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
 		m.addAttribute("list", list);
 		return "AdminDriverView";
 	}
