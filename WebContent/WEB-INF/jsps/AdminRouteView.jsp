@@ -5,10 +5,134 @@
 <html>
 <head>
 <!-- <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" /> -->
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
-	function modifyRoute(i)
+		$.noConflict();
+		
+		jQuery(document).ready(function($){
+			
+			$('Button[id^=editbtn]').click(function()
+			{
+				$(this).parents('tr').eq(0).find("input:not(:first)").removeAttr("disabled");
+				$(this).css({display:'none'});
+				$(this).siblings('Button[id^=savebtn]').css({display:'inline'});
+				$(this).siblings('img[id^=cancelbtn]').css({display:'inline'});
+				
+			});
+			
+			$('Button[id^=savebtn]').click(function()
+			{
+				$(this).css("display",'none');
+				var tr = $(this).parents('tr').eq(0);
+				
+				tr.find("input:not(:first)").attr("disabled","disabled");
+				tr.find('img[id^=cancelbtn]').css("display","none");
+				tr.find('button[id^=editbtn]').css("display","inline");
+				
+				  swal({
+					  title: "please wait....",
+					  icon : '/ATA/static/images/runningrabbit.gif',
+					  buttons: false
+					});  
+				
+			    var url = "/ATA/Admin/modifyRoute/?"
+				var tr = $(this).parents('tr').eq(0);
+				tr.find("input[name]").each(function(){
+					url += $(this).attr('name')+"="+$(this).prop('value')+"&";
+				});
+				url = url.slice(0,-1);
+				console.log("url is "+url);
+				
+				$.get(url,function(data, status)
+				{
+					if(status=="success")
+					 	swal({
+						  	 title: status,
+						 	 text: data,
+						  	 icon : 'success'
+							});
+					else
+						swal({
+							  title: status,
+							  text: data,
+							  icon : 'info'
+							});
+				});					 
+			});
+			
+			$('img[id^=cancelbtn]').click(function()
+			{
+				$(this).css("display",'none');
+				var tr = $(this).parents('tr').eq(0);
+				tr.find("input:not(:first)").attr("disabled","disabled");
+				tr.find('button[id^=savebtn]').css("display","none");
+				tr.find('button[id^=editbtn]').css("display","inline");
+			});
+			
+			$('button[id^=deletebtn]').click(function()
+			{
+				var tr = $(this).parents('tr').eq(0);
+				var id = tr.find("input[id^=routeID]").prop("value");
+				console.log("id is "+id);
+				//return;
+				
+				var url = "/ATA/Admin/dodelRoute/?id="+id;
+				
+					
+				 swal({
+					  title: "Are you sure?",
+					  text: "Once deleted, you will not be able to recover this !",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete)=>{
+						
+						if(willDelete)
+						{
+							$.get(url,function(data,status)
+									{
+										console.log(status+", "+data);
+										 var icontxt = "info";
+										    
+										    
+										    if(data=="success"){
+										    	tr.remove();  //if success is returned then removing the current row from table;
+										    	icontxt="success";
+										    }
+										    	
+										    swal(data, {
+											      icon: icontxt,
+											     });
+										});
+						}
+						else
+							swal("operation cancelled !!",{icon : "info"})
+					});
+			});
+			
+			
+			
+			$('#search').keyup(function()
+			{
+				console.log("keyup");
+				var keyword = $(this).prop('value').toLowerCase();
+				    $("#myTable tr").filter(function() {
+				    	var txt= $(this).find("td:first").text()+" ";
+				    	$(this).find('input[name]').each(function(){
+				    		txt += this.value+" ";
+				    	});
+				    	console.log(txt);
+				    	
+				      $(this).toggle(txt.toLowerCase().indexOf(keyword) > -1);
+				    });
+		
+			});
+		});
+
+	/* function modifyRoute(i)
 	{
 		document.getElementById("edit"+i).style="display:none";
 		document.getElementById("save"+i).style="display:inline";
@@ -86,7 +210,7 @@
 			//hiding cancelbtn
 			document.getElementById('cancelbtn'+i).style="display:none;";
 			
-		}
+		} */
 	
 </script>
 
@@ -100,14 +224,18 @@
 <div class="container my-5">
 
 <div align="right">
+<input class="form-control col-lg-2" id="search" title="search box" placeholder="search any thing !!!" value="">
 <br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addRouteModal" >Add Route</button>
+
 </div>
 
 <table class="table table-hover">
 <thead class="thead-dark">
 <tr><th>Sno.</th><th>RouteID</th><th>Source</th><th>Destination</th><th>Distance</th><th>TravelDuration</th><th style="width:10%;">Edit</th><th>Delete</th></tr>
-
 </thead>
+</table>
+
+<table class="table table-hover" id="myTable">
 <tbody class="form-group">
 	<c:forEach var="r"  items="${list}">
 		<tr>
@@ -129,14 +257,14 @@
 		<td>
 		<input class="form-control" style="width:100%" type="text" value="${r.travelduration}" id="travelduration${list.indexOf(r)}" name="travelduration" disabled="disabled">
 		</td>
-		<td>
+		<td style="width:10%;">
 		<button id="editbtn${list.indexOf(r)}" type="button" onclick="modifyRoute('${list.indexOf(r)}')" class="btn btn-outline-warning">Edit</button>
 		
 		<button style="display:none;" id="savebtn${list.indexOf(r)}"  type="button" onclick="saveChanges('${list.indexOf(r)}')" class="btn btn-primary">Save</button>
 		<img style="display:none; " id="cancelbtn${list.indexOf(r)}" width="20%"  onclick="cancelEdit('${list.indexOf(r)}')" alt="x" title="cancel" src="/ATA/static/images/close.png">
 		</td>
 		<td>
-		<button type="button" class="btn btn-outline-danger" onclick="verifyAction('${r.routeID}');">Delete</button>
+		<button id="deletebtn${list.indexOf(r)}" type="button" class="btn btn-outline-danger" onclick="verifyAction('${r.routeID}');">Delete</button>
 		</td>
 
 		</tr>

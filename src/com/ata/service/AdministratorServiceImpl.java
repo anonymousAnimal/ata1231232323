@@ -116,6 +116,7 @@ public class AdministratorServiceImpl implements Administrator {
 
 	@Override
 	public int deleteRoute(ArrayList<String> routeID) {
+		
 		int rows=routeDaoImpl.delete(routeID);
 		return rows;
 	}
@@ -139,6 +140,32 @@ public class AdministratorServiceImpl implements Administrator {
 		System.out.println("service layer : view booking details : routeid"+routeBean.getRouteID());
 		ArrayList<ReservationBean> al=resdaoimpl.findBookingByJR(journeyDate,routeBean.getRouteID());
 		return al;
+	}
+
+	
+	////////////EXTRA METHODS////////////////////
+	@Override
+	public DriverBean findByID(String s) {
+		DriverBean db=driverDaoImpl.findByID(s);
+		return db;
+	}
+
+	@Override
+	public ArrayList<RouteBean> findAllRoute() {
+		ArrayList<RouteBean>rb=routeDaoImpl.findAll();
+		return rb;
+	}
+
+	@Override
+	public ArrayList<VehicleBean> findAllVehicle() {
+		ArrayList<VehicleBean>vb=vehicleDaoImpl.findAll();
+		return vb;
+	}
+
+	@Override
+	public ArrayList<DriverBean> findAllDriver() {
+		ArrayList<DriverBean>db=driverDaoImpl.findAll();
+		return db;
 	}
 
 }

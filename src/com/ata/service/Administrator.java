@@ -23,5 +23,11 @@ public interface Administrator {
 	RouteBean viewRoute(String routeID);
 	boolean modifyRoute(RouteBean routeBean);
 	ArrayList<ReservationBean> viewBookingDetails(Date journeyDate,String source, String destination); 
-
+	
+	/////////EXTRA METHODS////////////////
+	DriverBean findByID(String s);
+	ArrayList<RouteBean>findAllRoute();
+	ArrayList<VehicleBean>findAllVehicle();
+	ArrayList<DriverBean>findAllDriver();
+	
 }
