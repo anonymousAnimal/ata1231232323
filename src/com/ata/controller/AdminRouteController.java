@@ -26,8 +26,6 @@ public class AdminRouteController {
 	Administrator administratorServiceImpl;
 	@Autowired
 	AuthImpl authImpl;
-	@Autowired
-	RouteDaoImpl rdao;
 	
 	/*@RequestMapping("/addroute")
 	public String addRoute(Model m) 
@@ -43,10 +41,12 @@ public class AdminRouteController {
 		//authenticate user
 		if(authImpl.authorize(cb.getUserID()).equals("A")){
 		administratorServiceImpl.addRoute(routeBean);
+		m.addAttribute("status",true);
 		m.addAttribute("msg","RouteAdded");
 		}
 		else
 		{
+			m.addAttribute("status",false);
 			m.addAttribute("msg","route couldn't be added!!!");
 		}
 		
@@ -58,11 +58,14 @@ public class AdminRouteController {
 	public String modifyRoute1(RouteBean routeBean,Model m) 
 	{
 		boolean res=administratorServiceImpl.modifyRoute(routeBean);
-		if(res)
+		if(res){
 			m.addAttribute("msg","Route modified");
-		else
+			m.addAttribute("status",true);
+		}
+		else{
+			m.addAttribute("status",false);
 			m.addAttribute("msg","Route cannot be modified due to some error");
-		
+		}
 		return goToEditDelete(m);
 
 	}
@@ -86,9 +89,11 @@ public class AdminRouteController {
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
 		int rows=administratorServiceImpl.deleteRoute(ar);
+		m.addAttribute("status",true);
 		m.addAttribute("msg","Route deleted with id : "+id);
 		}
 		catch(Exception e) {
+			m.addAttribute("status",false);
 			m.addAttribute("msg","Cannot delete Route id="+id+": it may be booked by customer ["+e.getMessage()+"]");
 		}
 
@@ -98,7 +103,7 @@ public class AdminRouteController {
 	
 	@RequestMapping("/goToEditDelete")
 	public String goToEditDelete(Model m){
-		ArrayList<RouteBean> list= rdao.findAll();
+		ArrayList<RouteBean> list= administratorServiceImpl.findAllRoute();
 		m.addAttribute("list", list);
 		return "AdminRouteView";
 	}

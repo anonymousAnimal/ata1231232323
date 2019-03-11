@@ -141,4 +141,30 @@ public class AdministratorServiceImpl implements Administrator {
 		return al;
 	}
 
+	
+	////////////EXTRA METHODS////////////////////
+	@Override
+	public DriverBean findByID(String s) {
+		DriverBean db=driverDaoImpl.findByID(s);
+		return db;
+	}
+
+	@Override
+	public ArrayList<RouteBean> findAllRoute() {
+		ArrayList<RouteBean>rb=routeDaoImpl.findAll();
+		return rb;
+	}
+
+	@Override
+	public ArrayList<VehicleBean> findAllVehicle() {
+		ArrayList<VehicleBean>vb=vehicleDaoImpl.findAll();
+		return vb;
+	}
+
+	@Override
+	public ArrayList<DriverBean> findAllDriver() {
+		ArrayList<DriverBean>db=driverDaoImpl.findAll();
+		return db;
+	}
+
 }

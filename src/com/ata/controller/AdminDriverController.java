@@ -29,8 +29,7 @@ public class AdminDriverController {
 	Administrator administratorServiceImpl;
 	@Autowired
 	AuthImpl authImpl;
-	@Autowired
-	DriverDaoImpl driverdao;
+	
 	
 	@RequestMapping("/addDriver")
 	public String addDriver(Model m) 
@@ -49,11 +48,13 @@ public class AdminDriverController {
 				if(authImpl.authorize(cb.getUserID()).equals("A"))
 				{
 					administratorServiceImpl.addDriver(driverBean);
-					m.addAttribute("msg","DriverAdded");
+					m.addAttribute("status", true);
+					m.addAttribute("msg","Driver Added");
 				}
 			}catch(Exception e) {
 				System.out.println("Exception occurs : "+e.getMessage());
-				m.addAttribute("msg","invalid details of driver [may be duplicate license number]");
+				m.addAttribute("status",false);
+				m.addAttribute("msg","Invalid details of driver [may be duplicate license number]");
 			}
 		
 			
@@ -64,7 +65,9 @@ public class AdminDriverController {
 	@RequestMapping("/modifyDriver/{id}")
 	public String modifyVehicle(@PathVariable("id")String driverID,Model m) 
 	{
-		DriverBean db=driverdao.findByID(driverID);
+		
+		DriverBean db=administratorServiceImpl.findByID(driverID);
+		
 		m.addAttribute("driverBean",db);
 		return "ModifyDriver";
 	}
@@ -85,6 +88,17 @@ public class AdminDriverController {
 		
 		return msg;
 		/*ArrayList<DriverBean> list= driverdao.findAll();
+=======
+		if(res){
+			m.addAttribute("status",true);
+			m.addAttribute("msg","Driver modified");
+		}
+		else{
+			m.addAttribute("status",false);
+			m.addAttribute("msg","some error occured");
+		}
+		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
+>>>>>>> branch 'master' of https://github.com/anonymousAnimal/ata1231232323.git
 		m.addAttribute("list", list);
 		return "AdminDriverView";*/
 		//return "AdminDashboard";
@@ -108,22 +122,22 @@ public class AdminDriverController {
 		else
 			//m.addAttribute("msg","cannot delete driver with id: "+id);
 			msg = "cannot delete driver with id: "+id;
+
 		}
 		catch(Exception e) {
 			msg = "cannot delete driver with id: "+id+" as it may be assigned to a user ";
 			//m.addAttribute("msg","cannot delete driver with id: "+id+" as it may be assigned to a user ");
+
 		}
 		return msg;
 	
-		/*ArrayList<DriverBean> list= driverdao.findAll();
-		m.addAttribute("list", list);
-		return "AdminDriverView";*/
+
 	}
 	
 	@RequestMapping("/driverEditDelete")
 	public String goToEditDelete(Model m){
 		
-		ArrayList<DriverBean> list= driverdao.findAll();
+		ArrayList<DriverBean> list= administratorServiceImpl.findAllDriver();
 		m.addAttribute("list", list);
 		return "AdminDriverView";
 	}
