@@ -45,11 +45,13 @@ public class AdminVehicleController {
 		//authorize user
 		if(authImpl.authorize(cb.getUserID()).equals("A")){
 		administratorServiceImpl.addVehicle(vehicleBean);
-		m.addAttribute("msg","VehicleAdded");
+		m.addAttribute("status", true);
+		m.addAttribute("msg","Vehicle Added Successfully");
 		}
 		else
 		{
-			m.addAttribute("msg","INVALID");
+			m.addAttribute("status", false);
+			m.addAttribute("msg","Some error occured !!Cannot add Vehicle!!!");
 		}
 		//return "AdminDashboard";
 		return goToEditDelete(m);
@@ -67,9 +69,15 @@ public class AdminVehicleController {
 	public String modifyVehicle1(VehicleBean vehicleBean,Model m) 
 	{
 		boolean res=administratorServiceImpl.modifyVehicle(vehicleBean);
-		if(res)
+		if(res){
+			m.addAttribute("status", true);
 			m.addAttribute("msg","Vehicle modified");
-		
+		}
+		else
+		{
+			m.addAttribute("status", false);
+			m.addAttribute("msg","Some error occured !!Cannot modify Vehicle!!!");
+		}
 		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
 		m.addAttribute("list", list);
 	
@@ -85,13 +93,16 @@ public class AdminVehicleController {
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
 		int rows=administratorServiceImpl.deleteVehicle(ar);
+		m.addAttribute("status", true);
 		m.addAttribute("msg","Vehicle deleted with id : "+id);
 		}
 		catch(Exception e) {
-			m.addAttribute("msg","cannot delete vehicle id = "+id+" because it may already be assigned to a customer ");
+			m.addAttribute("status", false);
+			m.addAttribute("msg","Cannot Delete Vehicle id = "+id+" because it may already be assigned to a Customer ");
 		}
-	
-		return "AdminDashboard";
+		ArrayList<VehicleBean> list= vehicleDaoImpl.findAll();
+		m.addAttribute("list", list);
+		return "AdminVehicleView";
 	}
 	
 	@RequestMapping("/vehicleEditDelete")

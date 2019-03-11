@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.ata.dao.VehicleDaoImpl;
 import com.ata.util.AuthImpl;
 
 @Controller
+
 public class CustomerServiceImpl implements Customer{
 
 	@Autowired
@@ -103,8 +105,7 @@ public class CustomerServiceImpl implements Customer{
 	public String bookVehicle(ReservationBean reservationBean) {
 		if(authorizeCustomer())
 		{
-			//
-						
+					
 			return resDaoImpl.create(reservationBean);  //return reservationid
 		}
 		return "FAIL";
@@ -264,10 +265,17 @@ public class CustomerServiceImpl implements Customer{
 		
 		//validating carddetails
 		PaymentBean pb = paymentDaoImpl.findByID(paymentBean.getCreditCardNumber());
+		if(pb == null)
+		{
+			System.out.println("card not found with this cardno.");
+			return false;
+		}
+			
+		
 		if(!pb.getValidFrom().trim().toUpperCase().equals(paymentBean.getValidFrom().trim().toUpperCase())
 				| !pb.getValidTo().trim().toUpperCase().equals(paymentBean.getValidTo().trim().toUpperCase()))
 		{
-			System.out.println("invalid card");
+			System.out.println("invalid card : wrong validity");
 			return false;        //failed to validate
 		}
 		

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ata.bean.CredentialsBean;
 import com.ata.bean.PaymentBean;
+import com.ata.bean.ProfileBean;
 import com.ata.bean.ReservationBean;
 import com.ata.bean.RouteBean;
 import com.ata.bean.VehicleBean;
@@ -174,6 +175,7 @@ public class UserBooking {
 		ReservationBean rvb = (ReservationBean)session.getAttribute("reservationBean");
 		VehicleBean vb = (VehicleBean) session.getAttribute("vehicleBean");
 		RouteBean rb = (RouteBean) session.getAttribute("routeBean");
+		ProfileBean pb = (ProfileBean) session.getAttribute("profileBean");
 		
 		Double payment = vb.getFarePerKM() * rb.getDistance();
 		
@@ -184,9 +186,13 @@ public class UserBooking {
 			String res = cservice.bookVehicle(rvb);
 			System.out.println("saving reservationbean result : "+res);
 			m.addAttribute("msg","payment successful :)");
+			m.addAttribute("status","true");
+			m.addAttribute("name",pb.getFirstName()+" "+pb.getLastName());
 		}
-		else
-			m.addAttribute("msg","payment unsuccessful :(");
+		else {
+			m.addAttribute("msg","payment unsuccessful :(<br> please check your card details and balance !");
+			m.addAttribute("status","false");
+		}
 		return "PaymentResult";
 	}
 	
