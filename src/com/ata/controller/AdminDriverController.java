@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ata.bean.CredentialsBean;
 import com.ata.bean.DriverBean;
@@ -70,45 +71,53 @@ public class AdminDriverController {
 	
 	
 	@RequestMapping("/modifyDriver1")
-	public String modifyVehicle1(DriverBean driverBean,Model m) 
+	public @ResponseBody String modifyVehicle1(DriverBean driverBean,Model m) 
 	{
 		System.out.println(driverBean);
+		String msg="";
 		boolean res=administratorServiceImpl.modifyDriver(driverBean);
 		if(res)
-			m.addAttribute("msg","Driver modified");
+			//m.addAttribute("msg","Driver modified");
+			msg="driver modified!";
 		else
-			m.addAttribute("msg","some error occured");
+			//m.addAttribute("msg","some error occured");
+			msg="some error occured";
 		
-		ArrayList<DriverBean> list= driverdao.findAll();
+		return msg;
+		/*ArrayList<DriverBean> list= driverdao.findAll();
 		m.addAttribute("list", list);
-		return "AdminDriverView";
+		return "AdminDriverView";*/
 		//return "AdminDashboard";
 	}
 	
 	
 	
 	@RequestMapping("/dodelDriver/{id}")
-	public String delDriver1( @PathVariable("id")String id,DriverBean driverBean,Model m) 
+	public @ResponseBody String delDriver1( @PathVariable("id")String id, Model m) 
 	{
 		//CredentialsBean cb=(CredentialsBean)ses.getAttribute("credentialsBean");
 		//authenticate user
+		String msg ="";
 		try{
 		ArrayList<String>ar=new ArrayList<String>();
 		ar.add(id);
 		int rows=administratorServiceImpl.deleteDriver(ar);
 		if(rows > 0)
-			m.addAttribute("msg","Driver deleted with id : "+id);
+			//m.addAttribute("msg","Driver deleted with id : "+id);
+			msg = "success";
 		else
-			m.addAttribute("msg","cannot delete driver with id: "+id);
+			//m.addAttribute("msg","cannot delete driver with id: "+id);
+			msg = "cannot delete driver with id: "+id;
 		}
 		catch(Exception e) {
-			m.addAttribute("msg","cannot delete driver with id: "+id+" as it may be assigned to a user ");
+			msg = "cannot delete driver with id: "+id+" as it may be assigned to a user ";
+			//m.addAttribute("msg","cannot delete driver with id: "+id+" as it may be assigned to a user ");
 		}
-		
+		return msg;
 	
-		ArrayList<DriverBean> list= driverdao.findAll();
+		/*ArrayList<DriverBean> list= driverdao.findAll();
 		m.addAttribute("list", list);
-		return "AdminDriverView";
+		return "AdminDriverView";*/
 	}
 	
 	@RequestMapping("/driverEditDelete")

@@ -7,74 +7,135 @@
 <link rel="stylesheet" type="text/css" href="/ATA/static/css/table.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 	
+$.noConflict();
 	
+	jQuery(document).ready(function($){
+		
+		$('Button[id^=editbtn]').click(function()
+		{
+			$(this).parents('tr').eq(0).find("input:not(:first)").removeAttr("disabled");
+			$(this).css({display:'none'});
+			$(this).siblings('Button[id^=savebtn]').css({display:'inline'});
+			$(this).siblings('img[id^=cancelbtn]').css({display:'inline'});
+			
+		});
+		
+		$('Button[id^=savebtn]').click(function()
+		{
+			$(this).css("display",'none');
+			var tr = $(this).parents('tr').eq(0);
+			
+			tr.find("input:not(:first)").attr("disabled","disabled");
+			tr.find('img[id^=cancelbtn]').css("display","none");
+			tr.find('button[id^=editbtn]').css("display","inline");
+			
+			  swal({
+				  title: "please wait....",
+				  icon : '/ATA/static/images/runningrabbit.gif',
+				  buttons: false
+				});  
+			
+		    var url = "/ATA/Admin/modifyDriver1/?"
+			var tr = $(this).parents('tr').eq(0);
+			tr.find("input[name]").each(function(){
+				url += $(this).attr('name')+"="+$(this).prop('value')+"&";
+			});
+			url = url.slice(0,-1);
+			console.log("url is "+url);
+			
+			$.get(url,function(data, status)
+			{
+				if(status=="success")
+				 	swal({
+					  	 title: status,
+					 	 text: data,
+					  	 icon : 'success'
+						});
+				else
+					swal({
+						  title: status,
+						  text: data,
+						  icon : 'info'
+						});
+			});					 
+		});
+		
+		$('img[id^=cancelbtn]').click(function()
+		{
+			$(this).css("display",'none');
+			var tr = $(this).parents('tr').eq(0);
+			tr.find("input:not(:first)").attr("disabled","disabled");
+			tr.find('button[id^=savebtn]').css("display","none");
+			tr.find('button[id^=editbtn]').css("display","inline");
+		});
+		
+		$('button[id^=deletebtn]').click(function()
+		{
+			var tr = $(this).parents('tr').eq(0);
+			var id = tr.find("input[id^=driverID]").prop("value");
+			console.log("id is "+id);
+			//return;
+			
+			var url = "/ATA/Admin/dodelDriver/"+id;
+			
+				
+			 swal({
+				  title: "Are you sure?",
+				  text: "Once deleted, you will not be able to recover this !",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((willDelete) =>{
+					
+					if(willDelete)
+					{
+						$.get(url,function(data,status)
+								{
+									console.log(status+", "+data);
+									 var icontxt = "info";
+									    
+									    
+									    if(data=="success"){
+									    	tr.remove();  //if success is returned then removing the current row from table;
+									    	icontxt="success";
+									    }
+									    	
+									    swal(data, {
+										      icon: icontxt,
+										     });
+									});
+					}
+					else
+						swal("operation cancelled !!",{icon : "info"})
+				});
+		});
+		
+		
+		
+		$('#search').keyup(function()
+		{
+			console.log("keyup");
+			var keyword = $(this).prop('value').toLowerCase();
+			    $("#myTable tr").filter(function() {
+			    	var txt= $(this).find("td:first").text()+" ";
+			    	$(this).find('input[name]').each(function(){
+			    		txt += this.value+" ";
+			    	});
+			    	console.log(txt);
+			    	
+			      $(this).toggle(txt.toLowerCase().indexOf(keyword) > -1,"slow");
+			    });
 
-	function modifyDriver(i){
-		//hiding editbtn
-		document.getElementById('editbtn'+i).style="display:none;";
-		//showing savechangesbtn and cancelbtn
-		document.getElementById('savebtn'+i).style="display:inline;";
-		document.getElementById('cancelbtn'+i).style="display:inline;";
-		
-		//enabling the fields
-		document.getElementById("name"+i).removeAttribute("disabled");
-		document.getElementById("street"+i).removeAttribute("disabled");
-		document.getElementById("location"+i).removeAttribute("disabled");
-		document.getElementById("city"+i).removeAttribute("disabled");
-		document.getElementById("state"+i).removeAttribute("disabled");
-		document.getElementById("pincode"+i).removeAttribute("disabled");
-		document.getElementById("mobileNo"+i).removeAttribute("disabled");
-		document.getElementById("licenseNumber"+i).removeAttribute("disabled");
-		
-	}
+		});
+	});
+
 	
-	function saveChanges(i)
-	{
-		var id = document.getElementById("driverID"+i).value;
-		var name = document.getElementById("name"+i).value;
-		var street = document.getElementById('street'+i).value;
-		var location = document.getElementById('location'+i).value;
-		var city = document.getElementById('city'+i).value;
-		var state = document.getElementById('state'+i).value;
-		var pincode = document.getElementById('pincode'+i).value;
-		var mobile = document.getElementById('mobileNo'+i).value;
-		var license = document.getElementById('licenseNumber'+i).value;
-		
-		var url = "/ATA/Admin/modifyDriver1/?driverID="+id+"&name="+name+"&street="+street+"&location="+location+"&city="+city+"&state="+state+"&pincode="+pincode+"&mobileNo="+mobile+"&licenseNumber="+license;
-		window.location.href=url;
-	}
-	
-	function deleteDriver(id){
-		var res = confirm("Attention!! this will delete the driver permanently");
-		if(!res)
-			return;
-		window.location.href='/ATA/Admin/dodelDriver/'+id;
-		
-	}
-	
-	function cancelEdit(i){
-		
-		//disabling the fields
-		document.getElementById("name"+i).setAttribute("disabled","disabled");
-		document.getElementById("street"+i).setAttribute("disabled","disabled");
-		document.getElementById("location"+i).setAttribute("disabled","disabled");
-		document.getElementById("city"+i).setAttribute("disabled","disabled");
-		document.getElementById("state"+i).setAttribute("disabled","disabled");
-		document.getElementById("pincode"+i).setAttribute("disabled","disabled");
-		document.getElementById("mobileNo"+i).setAttribute("disabled","disabled");
-		document.getElementById("licenseNumber"+i).setAttribute("disabled","disabled");
-		
-		//showing editbtn
-		document.getElementById('editbtn'+i).style="display:inline;";
-		//hiding savechangesbtn
-		document.getElementById('savebtn'+i).style="display:none;";
-		//hiding cancelbtn
-		document.getElementById('cancelbtn'+i).style="display:none;";
-		
-	}
 </script>
 
 
@@ -84,13 +145,17 @@
 
 <div class="container-fluid my-5 ">
 <div align="right">
+<input class="form-control col-lg-2" id="search" title="search box" placeholder="search any thing !!!" value="">
 <br><button  type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addDriverModal" >Add Driver</button>
 </div>
 <table  class="table table-hover" >
 <thead class="thead-dark">
 <tr><th>sno</th><th>DriverID</th><th>Name</th><th>Street</th><th>Location</th><th>City</th><th>State</th><th>Pincode</th><th>MobileNo.</th><th>LicenseNo.</th><th>Edit</th><th>Delete</th></tr>
 </thead>
-<tbody class="form-group">
+</table >
+<div style="height:500px; overflow-y:auto;">
+<table class="table table-hover" id="myTable" >
+<tbody class="form-group" >
 
 	<c:forEach var="r"  items="${list}" >
 		<tr>
@@ -131,7 +196,7 @@
 		<img style="display:none; img:hover;" id="cancelbtn${list.indexOf(r)}" width="15%"  onclick="cancelEdit('${list.indexOf(r)}')" alt="x" title="cancel" src="/ATA/static/images/close.png">
 		</td>
 		<td>
-		<button  type="button" onclick="deleteDriver('${r.driverID}')" class="btn btn-outline-danger">Delete</button>
+		<button id='deletebtn${list.indexOf(r)}' type="button" onclick="deleteDriver('${r.driverID}')" class="btn btn-outline-danger">Delete</button>
 		</td>
 		</tr>
 
@@ -139,10 +204,10 @@
 	
 </tbody>
 </table>
-
+</div>
 
 <br>
-<h3>${msg }</h3>
+<%-- <h3>${msg }</h3> --%>
 </div>
 
 
